@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandacaru Games - Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span class="logo-icon">🌵</span> MANDACARU <span class="logo-subtitle">GAMES</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Quem somos</a></li>
+                <li><a href="#">Fale Conosco</a></li>
+                <li><a href="cadastro.html" class="btn-primary">Cadastre-se</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="signup-hero">
+        <div class="overlay"></div>
+        <div class="signup-hero-content">
+            <a href="index.html" class="back-link">
+                &#10094; Retornar a página inicial
+            </a>
+            <h1>Faça parte do nosso sonho!</h1>
+            <p>Cadastre-se para se tornar parte da nossa família!</p>
+            <a href="#" class="privacy-link-hero">Política de Privacidade</a>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <h2 class="form-title">Formulário de Preenchimento</h2>
+        
+        <form id="cadastroForm">
+            <div class="form-grid">
+                
+                <div class="form-column">
+                    <h3>Informações Pessoais</h3>
+                    
+                    <div class="input-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" placeholder="Digite seu nome completo">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder='"ccc@ddd.ccc" (caracteres, arroba, dominio, ponto, extensão)'>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="foto">Foto</label>
+                        <input type="file" id="foto" class="file-input">
+                        <div class="file-fake-input">Adicione uma foto até 5MB</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="senha">Crie sua senha</label>
+                        <input type="password" id="senha" placeholder="Crie uma senha forte">
+                        <ul class="validation-list">
+                            <li id="req-length" class="invalid">A senha deve possuir 10 caracteres.</li>
+                            <li id="req-upper" class="invalid">A senha deve possuir letras maiúsculas.</li>
+                            <li id="req-number" class="invalid">A senha deve possuir números.</li>
+                            <li id="req-special" class="invalid">A senha deve possuir caracteres especiais (apenas *, ;, # são permitidos).</li>
+                        </ul>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="senha-confirm">Repita sua senha</label>
+                        <input type="password" id="senha-confirm" placeholder="Digite a senha criada anteriormente">
+                        <p id="match-error" class="error-text invalid">A senha digitada deve ser igual a anterior.</p>
+                    </div>
+                </div>
+
+                <div class="form-column">
+                    <h3>Endereço</h3>
+                    
+                    <div class="input-group">
+                        <label for="cep">CEP</label>
+                        <input type="text" id="cep" placeholder="0000-000">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="rua">Rua</label>
+                        <input type="text" id="rua" placeholder="Digite sua rua">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="numero">Número</label>
+                        <input type="text" id="numero" placeholder="Digite o número de sua residencia">
+                        <div class="checkbox-inline">
+                            <input type="checkbox" id="sem-numero">
+                            <label for="sem-numero">Não se aplica</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" id="bairro" placeholder="Digite seu bairro">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" id="cidade" placeholder="Digite sua Cidade">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <p>Você autoriza a utilização de seu nome e foto para integrar nossos membros no site? <a href="#">Politica de Privacidade</a></p>
+                <div class="radio-group">
+                    <label><input type="radio" name="autoriza" value="sim"> Sim</label>
+                    <label><input type="radio" name="autoriza" value="nao"> Não</label>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="button" class="btn-clean" id="btnLimpar">Limpar</button>
+                    <button type="submit" class="btn-send">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-image">
+            <div class="img-placeholder-footer">Logo Footer</div>
+        </div>
+        <div class="footer-content">
+            <p class="footer-headline">
+                Como nossas equipes e criatividade estão moldando as histórias, 
+                conexões e comunidades que definem o futuro dos jogos.
+            </p>
+            <div class="footer-buttons">
+                <button class="btn-green">Saiba mais</button>
+                <button class="btn-green">Leia o relatório</button>
+            </div>
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Informação legal e de privacidade</a>
+                <a href="#">Contrato do Usuário</a>
+                <a href="#">Cookies</a>
+                <a href="#">Atualizações do serviço online de segurança</a>
+            </div>
+            <p class="copyright">© 2026 Mandacaru Games Inc.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
