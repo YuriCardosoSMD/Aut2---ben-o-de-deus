@@ -86,7 +86,7 @@ body {
     box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
 }
 
-/* --- Hero Section Geral (caso usada em outras pags) --- */
+/* --- Hero Section Geral --- */
 .hero-section {
     position: relative;
     padding: 80px 0;
@@ -139,7 +139,7 @@ body {
 }
 
 /* =========================================
-   ESTILOS DO FORMULÁRIO (ATUALIZADO)
+   ESTILOS DO FORMULÁRIO
    ========================================= */
 
 .form-layout-section {
@@ -164,15 +164,11 @@ body {
     gap: 40px;
 }
 
-.form-column-left {
-    flex: 1;
-    min-width: 300px;
-    max-width: 600px; /* Metade da tela aproximada para desktops */
-}
-
+.form-column-left,
 .form-column-right {
     flex: 1;
     min-width: 300px;
+    max-width: 600px; 
 }
 
 /* Subtítulo */
@@ -213,7 +209,6 @@ body {
     border: none;
     padding: 0 12px;
     
-    /* Texto interno do input */
     color: #000;
     font-family: 'DM Sans', sans-serif;
     font-size: 16px;
@@ -271,6 +266,50 @@ body {
     font-weight: 400;
     margin-bottom: 5px;
     word-wrap: break-word;
+}
+
+/* --- Checkbox Customizado (Não se aplica) --- */
+.checkbox-wrapper-styled {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    user-select: none; /* Impede seleção de texto ao clicar */
+}
+
+/* Input invisível para acessibilidade e estado */
+.hidden-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color); /* Cor padrão do SVG */
+    transition: color 0.3s;
+}
+
+/* Estado Marcado (Checked) */
+.hidden-checkbox-input:checked + .checkbox-icon {
+    color: var(--primary-green); /* Muda a cor do ícone quando marcado */
+}
+
+/* Opcional: Efeito de preenchimento ao marcar */
+.hidden-checkbox-input:checked + .checkbox-icon svg {
+    fill: var(--primary-green);
+}
+
+.checkbox-label-text {
+    color: #F6EFEF;
+    font-size: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
 }
 
 /* =========================================

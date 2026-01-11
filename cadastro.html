@@ -98,7 +98,50 @@
                     </div>
 
                     <div class="form-column-right">
+                        
+                        <div data-layer="Endereço" class="form-subtitle" style="text-align: center;">
+                            Endereço
                         </div>
+
+                        <form id="addressForm" class="styled-form">
+
+                            <div class="input-group">
+                                <label for="cep" class="input-label-text">CEP</label>
+                                <input type="text" id="cep" class="styled-input" placeholder="0000-000">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="rua" class="input-label-text">Rua</label>
+                                <input type="text" id="rua" class="styled-input" placeholder="Digite sua rua">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="numero" class="input-label-text">Número</label>
+                                <input type="text" id="numero" class="styled-input" placeholder="Digite o número de sua residencia">
+                            </div>
+
+                            <label class="checkbox-wrapper-styled">
+                                <input type="checkbox" id="sem-numero" class="hidden-checkbox-input">
+                                <div data-svg-wrapper class="checkbox-icon">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 18C1.45 18 0.979333 17.8043 0.588 17.413C0.196667 17.0217 0.000666667 16.5507 0 16V2C0 1.45 0.196 0.979333 0.588 0.588C0.98 0.196667 1.45067 0.000666667 2 0H16C16.55 0 17.021 0.196 17.413 0.588C17.805 0.98 18.0007 1.45067 18 2V16C18 16.55 17.8043 17.021 17.413 17.413C17.0217 17.805 16.5507 18.0007 16 18H2ZM2 16H16V2H2V16Z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <span class="checkbox-label-text">Não se aplica</span>
+                            </label>
+
+                            <div class="input-group">
+                                <label for="bairro" class="input-label-text">Bairro</label>
+                                <input type="text" id="bairro" class="styled-input" placeholder="Digite seu bairro">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="cidade" class="input-label-text">Cidade</label>
+                                <input type="text" id="cidade" class="styled-input" placeholder="Digite sua Cidade">
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
 
             </div>
