@@ -1,574 +1,272 @@
-/* Reset Básico */
+:root {
+    --bg-color: #252525;
+    --card-bg: #1e1e1e;
+    --text-color: #ffffff;
+    --primary-green: #5BBF60; /* Verde do botão e acentos */
+    --accent-purple: #9D65C9; /* Roxo dos cards */
+    --font-main: 'Inter', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
-:root {
-    --primary-green: #5CC75C; /* Verde vibrante */
-    --dark-green: #3a8a3a;
-    --primary-purple: #C8A2FF; /* Lilás */
-    --bg-light: #F4F4F4;
-    --text-dark: #333;
 }
 
 body {
-    background-color: var(--bg-light);
-    color: var(--text-dark);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
 }
 
-/* --- HEADER --- */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    background-color: #f9f9f9;
-}
-
-.logo {
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--primary-green);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.logo-subtitle {
-    color: var(--primary-purple);
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    align-items: center;
-    gap: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #000;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
+/* --- Botões --- */
 .btn-primary {
     background-color: var(--primary-green);
-    color: #fff !important;
+    color: #000;
+    border: none;
     padding: 10px 20px;
-    border-radius: 5px;
-    transition: 0.3s;
+    border-radius: 4px;
+    font-weight: 800;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
-.btn-primary:hover {
-    background-color: var(--dark-green);
-}
-
-/* --- HERO SECTION --- */
-.hero {
-    display: flex;
-    height: 400px; /* Ajuste conforme necessário */
-}
-
-.hero-content {
-    width: 50%;
-    background: linear-gradient(135deg, rgba(160, 130, 255, 0.3), rgba(92, 199, 92, 0.3));
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-}
-
-.hero-content h2 {
-    font-size: 2.5rem;
-    color: #222;
-}
-
-.hero-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #444;
-    max-width: 500px;
-}
-
-.btn-green {
+.btn-secondary {
     background-color: var(--primary-green);
-    color: #fff;
+    color: #000;
     border: none;
     padding: 12px 24px;
     border-radius: 4px;
     font-weight: 700;
     cursor: pointer;
-    width: fit-content;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 15px;
+}
+
+.btn-secondary.small {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    margin-right: 10px;
+}
+
+/* --- Navbar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.logo {
+    font-family: 'Courier New', monospace; /* Fonte estilo pixel/code */
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--primary-green);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.purple-text {
+    color: var(--accent-purple);
+}
+
+.pixel-icon {
+    font-size: 1.5rem;
+}
+
+/* --- Hero Section --- */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 10%;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    color: #cccccc;
+    max-width: 500px;
+    margin-bottom: 20px;
 }
 
 .hero-image {
-    width: 50%;
-    background-color: #333; /* Cor de fundo caso a imagem falhe */
-    position: relative;
-    overflow: hidden;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.img-placeholder {
-    width: 100%;
-    height: 100%;
-    background: url('https://placehold.co/800x400/222/5CC75C?text=Pixel+Art+Background') no-repeat center center/cover;
+.big-logo-placeholder {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--primary-green);
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-/* --- GAMES GRID --- */
+.pixel-icon-large {
+    font-size: 4rem;
+}
+
+/* --- Games Section --- */
 .games-section {
     padding: 50px 10%;
-    background-color: var(--bg-light);
     text-align: center;
 }
 
-.section-title {
+.games-section h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
-    color: #222;
 }
 
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    justify-items: center;
 }
 
 .game-card {
-    width: 100%;
-    max-width: 250px;
-    aspect-ratio: 1/1;
+    height: 350px;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    background-size: cover;
+    background-position: center;
 }
 
 .game-card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.02);
 }
 
-.game-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Sobreposição do título no card (opcional, igual ao design Celeste) */
-.game-title-overlay {
+/* Overlay colorido sobre o card */
+.game-card::after {
+    content: '';
     position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 1.5rem;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.7; 
+}
+
+/* Cores alternadas (classes aplicadas via JS ou manual) */
+.card-green::after {
+    background-color: var(--primary-green);
+}
+.card-purple::after {
+    background-color: var(--accent-purple);
+}
+
+.game-title {
+    position: relative;
+    z-index: 2;
+    font-size: 2.5rem;
     font-weight: 800;
-    color: #000;
-    text-shadow: 0 0 5px rgba(255,255,255,0.5);
-}
-
-/* --- FOOTER --- */
-footer {
-    display: flex;
-    background: linear-gradient(to right, #3d3d3d 40%, #8bc38b 40%); /* Truque visual para dividir o fundo */
-}
-
-.footer-image {
-    width: 40%;
-    background-color: #2a2a2a;
-}
-
-.img-placeholder-footer {
-    width: 100%;
-    height: 100%;
-    background: url('https://placehold.co/600x400/333/5CC75C?text=Mandacaru+Logo') no-repeat center center/cover;
-    min-height: 300px;
-}
-
-.footer-content {
-    width: 60%;
-    background: linear-gradient(135deg, #74d474, #b69aff); /* Gradiente Verde/Roxo */
-    padding: 40px 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.footer-headline {
-    font-weight: 600;
     color: #1a1a1a;
-    max-width: 600px;
+    text-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* --- Footer --- */
+footer {
+    background: linear-gradient(to top, #1a1a1a, transparent);
+    padding: 60px 10% 20px;
+    margin-top: 50px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+}
+
+.footer-info {
+    max-width: 500px;
+    text-align: right;
+}
+
+.footer-info p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 15px;
 }
 
 .footer-buttons {
     display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
+    justify-content: flex-end;
 }
 
-.footer-buttons .btn-green {
-    background-color: #4CAF50; /* Um verde um pouco mais escuro para contraste */
+.footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.7rem;
+    color: #888;
 }
 
 .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    font-size: 0.75rem;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .footer-links a {
+    color: #888;
     text-decoration: none;
-    color: #333;
+    margin: 0 10px;
 }
 
-.copyright {
-    font-size: 0.75rem;
-    margin-top: 10px;
-    color: #444;
+.footer-links a:hover {
+    color: var(--primary-green);
 }
 
-/* Responsividade Mobile */
+/* Mobile */
 @media (max-width: 768px) {
-    header, .hero, footer {
+    .hero {
         flex-direction: column;
+        text-align: center;
     }
     
-    .hero-content, .hero-image, .footer-image, .footer-content {
-        width: 100%;
+    .hero-content {
+        margin-bottom: 40px;
     }
 
-    footer {
-        background: none; /* Remove o fundo dividido no mobile */
-    }
-
-    nav ul {
+    .footer-top {
         flex-direction: column;
-        margin-top: 15px;
+        align-items: center;
+        text-align: center;
     }
-}
 
-/* --- PÁGINA DE CADASTRO --- */
-
-/* Hero Section do Cadastro */
-.signup-hero {
-    position: relative;
-    height: 300px;
-    background: url('https://placehold.co/1200x400/2a2a2a/5CC75C?text=Floresta+Pixel+Art') no-repeat center center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-}
-
-.signup-hero .overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Escurecer imagem */
-}
-
-.signup-hero-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.back-link {
-    position: absolute;
-    top: -60px; /* Ajuste conforme header */
-    left: -20vw; /* Posição relativa */
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.signup-hero h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-}
-
-.signup-hero p {
-    font-size: 1.1rem;
-    color: #ddd;
-}
-
-.privacy-link-hero {
-    color: #ccc;
-    font-size: 0.8rem;
-    text-decoration: underline;
-}
-
-/* Formulário */
-.form-section {
-    padding: 40px 10%;
-    background-color: #F8F8F8;
-}
-
-.form-title {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #666;
-    margin-bottom: 40px;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-}
-
-.form-column h3 {
-    font-size: 1.1rem;
-    color: #444;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-.input-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.input-group label {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #333;
-    margin-bottom: 8px;
-}
-
-.input-group input[type="text"],
-.input-group input[type="email"],
-.input-group input[type="password"] {
-    background-color: #D9D9D9;
-    border: none;
-    padding: 12px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    color: #333;
-}
-
-/* Estilo fake do input file */
-.file-input {
-    display: none; /* Esconde o input original feio */
-}
-.file-fake-input {
-    background-color: #D9D9D9;
-    padding: 12px;
-    border-radius: 5px;
-    color: #666;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-
-/* Validações em texto */
-.validation-list {
-    list-style: none;
-    margin-top: 5px;
-    font-size: 0.7rem;
-}
-
-.invalid {
-    color: #D32F2F; /* Vermelho erro */
-}
-.valid {
-    color: #388E3C; /* Verde sucesso */
-}
-
-/* Checkbox 'Não se aplica' */
-.checkbox-inline {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 5px;
-    font-size: 0.8rem;
-}
-
-/* Footer do Form (Sim/Não e Botões) */
-.form-footer {
-    text-align: center;
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-.form-footer p {
-    font-size: 0.85rem;
-    color: #555;
-}
-
-.radio-group {
-    display: flex;
-    gap: 20px;
-}
-
-.form-buttons {
-    display: flex;
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.btn-clean, .btn-send {
-    padding: 10px 40px;
-    border-radius: 5px;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-}
-
-.btn-clean {
-    background-color: var(--primary-green);
-    color: #fff;
-    opacity: 0.8;
-}
-
-.btn-send {
-    background-color: var(--dark-green);
-    color: #fff;
-}
-
-/* Responsividade Mobile para o Cadastro */
-@media (max-width: 768px) {
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .footer-info {
+        text-align: center;
     }
     
-    .back-link {
-        position: static;
-        margin-bottom: 10px;
-    }
-}
-
-/* --- PÁGINA DE LISTAGEM DE USUÁRIOS --- */
-
-.listing-hero {
-    position: relative;
-    height: 350px;
-    /* Reutilizando a imagem de fundo estilo pixel art */
-    background: url('https://placehold.co/1200x400/2a2a2a/5CC75C?text=Pixel+Art+Forest') no-repeat center center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-}
-
-.listing-hero .overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Um pouco mais escuro para leitura */
-}
-
-.listing-hero-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 20px;
-}
-
-/* Link de voltar específico da Listagem (posicionado no topo esquerdo do container) */
-.back-link-hero {
-    position: absolute;
-    top: -80px; /* Sobe para o topo da div hero */
-    left: 0;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1rem;
-}
-
-.listing-hero h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.listing-hero p {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-/* Seção dos Membros */
-.members-section {
-    padding: 50px 5%;
-    background-color: #F4F4F4;
-    text-align: center;
-    min-height: 500px;
-}
-
-.section-title-small {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 50px;
-    font-weight: 400; /* Fonte mais fina conforme layout */
-}
-
-.members-grid {
-    display: grid;
-    /* Tenta encaixar tantos quanto der, com largura mínima de 130px */
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 40px 20px; /* 40px vertical, 20px horizontal */
-    justify-items: center;
-}
-
-.member-card {
-    width: 100%;
-    max-width: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.member-photo {
-    width: 100%;
-    aspect-ratio: 1/1; /* Garante que seja quadrado */
-    object-fit: cover;
-    background-color: #ddd;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border-radius: 4px; /* Leve arredondamento */
-}
-
-.member-name {
-    font-size: 0.8rem;
-    color: #555;
-    text-align: center;
-    line-height: 1.2;
-}
-
-/* Responsividade Listagem */
-@media (max-width: 768px) {
-    .back-link-hero {
-        position: static; /* No mobile, deixa fluir no fluxo normal */
-        align-self: flex-start;
-        margin-bottom: 20px;
-    }
-    
-    .listing-hero h1 {
-        font-size: 2rem;
+    .footer-buttons {
+        justify-content: center;
     }
 }
