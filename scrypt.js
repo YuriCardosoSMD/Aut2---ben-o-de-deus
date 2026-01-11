@@ -41,3 +41,42 @@ document.addEventListener('DOMContentLoaded', () => {
         gamesGrid.appendChild(card);
     });
 });
+
+// ... (mantenha o código existente da home)
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- Lógica da Página de Cadastro ---
+    const formCadastro = document.getElementById('formCadastro');
+    const btnLimpar = document.getElementById('btnLimpar');
+
+    if (formCadastro) {
+        // Função do botão Limpar
+        if (btnLimpar) {
+            btnLimpar.addEventListener('click', () => {
+                const confirmClear = confirm("Deseja realmente limpar todos os campos?");
+                if (confirmClear) {
+                    formCadastro.reset();
+                }
+            });
+        }
+
+        // Função do botão Enviar (Submit)
+        formCadastro.addEventListener('submit', (event) => {
+            event.preventDefault(); // Impede o envio real para fins de demonstração
+
+            // Captura os dados
+            const formData = new FormData(formCadastro);
+            const nome = formData.get('nome');
+            const email = formData.get('email');
+            const autorizacao = formData.get('autorizacao');
+
+            // Exemplo de ação
+            console.log("Dados do Formulário:", { nome, email, autorizacao });
+            
+            alert(`Obrigado, ${nome}! Seu cadastro foi realizado com sucesso.\n(Autorização de imagem: ${autorizacao})`);
+            
+            formCadastro.reset();
+        });
+    }
+});
