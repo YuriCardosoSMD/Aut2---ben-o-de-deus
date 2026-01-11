@@ -5,7 +5,6 @@
     --text-color: #F6EFEF;     /* Texto claro */
     --primary-green: #4AAD4A;  /* Verde destaque */
     --accent-purple: #9D65C9;  /* Roxo secundário */
-    --glass-bg: rgba(41, 41, 41, 0.77); 
     
     /* Fontes */
     --font-main: 'DM Sans', sans-serif;
@@ -53,7 +52,6 @@ body {
     gap: 15px;
 }
 
-/* Logo do Topo aumentada */
 .logo {
     width: 150px;
     height: auto;
@@ -62,7 +60,7 @@ body {
 .company-name {
     font-size: 1.5rem;
     font-weight: 700;
-    display: none; /* Ocultei o texto pois a logo já diz o nome, remova essa linha se quiser o texto também */
+    display: none; 
 }
 
 /* --- Botão "Cadastre-se" --- */
@@ -92,7 +90,7 @@ body {
 .hero-section {
     position: relative;
     padding: 80px 0;
-    background: radial-gradient(circle at top right, rgba(76, 175, 81, 0.2), transparent);
+    overflow: hidden; 
 }
 
 .hero-grid {
@@ -101,7 +99,7 @@ body {
     justify-content: space-between;
     gap: 50px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 .hero-text {
@@ -123,10 +121,9 @@ body {
 .hero-image img {
     max-width: 100%;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* Botão Conheça nosso time */
 .btn-primary {
     display: inline-block;
     background-color: var(--primary-green);
@@ -142,6 +139,30 @@ body {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(74, 173, 74, 0.4);
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-image: url('assets/background-sobre.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2;
 }
 
 /* --- Games Section --- */
@@ -162,7 +183,6 @@ body {
     gap: 30px;
 }
 
-/* Estilos dos Cards */
 .game-card {
     background-color: var(--card-bg);
     border-radius: 12px;
@@ -204,135 +224,154 @@ body {
 .card-green { border-bottom: 4px solid var(--primary-green); }
 .card-purple { border-bottom: 4px solid var(--accent-purple); }
 
-/* --- Footer --- */
+
+/* =========================================
+   NOVO FOOTER (Atualizado v2)
+   ========================================= */
+
 .main-footer {
-    /* Espaçamento e Borda */
-    padding: 60px 0 20px;
-    margin-top: 50px;
-    border-top: 1px solid #333;
-
-    /* --- Fundo com Imagem e Overlay --- */
-    /* Usamos 'linear-gradient' para criar a camada escura (0.9 = 90% opacidade) sobre a imagem */
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), 
-                url('assets/background-sobre.jpg');
-    
-    /* Configuração para a imagem cobrir tudo e ficar centralizada */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    
-    /* Garante que o texto fique branco para contraste */
-    color: #fff; 
-}
-
-/* O restante dos estilos internos do footer continua o mesmo... */
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-}
-
-/* Configuração da Logo no Footer */
-.footer-logo {
-    width: 100px;
-    height: auto;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.footer-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.footer-brand h3 {
-    color: #fff; /* Força o título a ser branco */
-}
-
-.footer-links a {
-    color: #aaa; /* Cor cinza claro para os links */
-    margin-left: 20px;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.footer-links a:hover {
-    color: var(--primary-green);
-}
-
-.footer-bottom {
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
-    padding-top: 20px;
-    color: #888;
-    font-size: 0.9rem;
-}
-
-/* --- Hero Section (Sobre Nós) --- */
-.hero-section {
     position: relative;
     padding: 80px 0;
-    /* Removemos o background: radial-gradient(...) antigo daqui */
-    overflow: hidden; /* Garante que nada vaze pelas bordas */
-}
-
-.hero-grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
-    position: relative;
-    z-index: 3; /* Z-index alto para o texto ficar na frente de tudo */
-}
-
-.hero-text {
-    max-width: 600px;
-}
-
-/* ... estilos de h2 e p permanecem iguais ... */
-.hero-text h2 { font-size: 3rem; margin-bottom: 20px; font-weight: 700; }
-.hero-text p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
-/* ......................................... */
-
-.hero-image img {
-    max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra um pouco mais forte */
-}
-
-/* --- NOVO: Configuração da Imagem de Fundo --- */
-
-/* 1. A div que segura a imagem */
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; /* Fica atrás do texto (que é z-index 3) */
-    
-    /* Caminho da imagem */
+    color: var(--text-color);
     background-image: url('assets/background-sobre.jpg');
-    
-    /* Faz a imagem cobrir tudo sem distorcer */
     background-size: cover;
-    /* Centraliza a imagem */
     background-position: center;
-    /* Evita repetição se a imagem for pequena */
     background-repeat: no-repeat;
 }
 
-/* 2. Camada escura (Overlay) para melhorar a leitura do texto */
-.hero-background::after {
-    content: '';
+.footer-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Cor preta com 70% de transparência (0.7). Ajuste se ficar muito escuro ou muito claro */
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2; /* Fica sobre a imagem (z-index 1), mas atrás do texto (z-index 3) */
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 1;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    /* Alinha ao topo porque a direita tem mais conteúdo */
+    align-items: flex-start; 
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* --- Lado Esquerdo --- */
+.footer-left {
+    flex: 0 0 auto;
+}
+
+/* Logo Grande */
+.footer-logo-big {
+    width: 280px;
+    height: auto;
+    display: block;
+    
+    /* NOVO: Faz a logo descer. Aumente o valor se quiser que desça mais */
+    margin-top: 80px; 
+}
+
+/* --- Lado Direito --- */
+.footer-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Espaço entre os blocos (Headline, Botões, Links) */
+    max-width: 800px; /* Limite para não esticar demais em telas largas */
+}
+
+/* Texto de Destaque */
+.footer-headline {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+/* Área dos Botões */
+.footer-actions {
+    display: flex;
+    
+    /* ALTERADO: Aumentei de 20px para 50px para afastar os botões um do outro */
+    gap: 50px; 
+    
+    flex-wrap: wrap;
+
+    /* NOVO: Puxa o bloco de botões para a esquerda. 
+       Como eles estão alinhados com o texto, o valor negativo (-Xpx)
+       traz eles "para fora" do alinhamento, mais para a esquerda. */
+    margin-left: 50px; 
+    /* Ou use transform: translateX(-30px); se preferir */
+}
+
+.btn-footer {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 50px;
+    background-color: var(--primary-green);
+    color: #292929;
+    font-family: var(--font-main);
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-footer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.40);
+    filter: brightness(1.1);
+}
+
+/* Links Legais */
+.footer-legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 30px; /* Gap vertical e horizontal */
+    align-items: center;
+}
+
+.footer-legal-links a {
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.footer-legal-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Copyright (dentro da coluna direita) */
+.footer-copyright {
+    font-size: 16px;
+    opacity: 0.7;
+    margin-top: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .footer-content {
+        flex-direction: column;
+    }
+    
+    .footer-logo-big {
+        width: 200px; /* Reduz um pouco no mobile para caber melhor */
+        margin-bottom: 20px;
+    }
+
+    .footer-right {
+        width: 100%;
+    }
 }
