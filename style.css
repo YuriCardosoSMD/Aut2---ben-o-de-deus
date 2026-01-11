@@ -1,10 +1,14 @@
 :root {
-    --bg-color: #252525;
-    --card-bg: #1e1e1e;
-    --text-color: #ffffff;
-    --primary-green: #5BBF60; /* Verde do botão e acentos */
-    --accent-purple: #9D65C9; /* Roxo dos cards */
-    --font-main: 'Inter', sans-serif;
+    /* Cores do Design */
+    --bg-color: #252525;       /* Fundo geral */
+    --card-bg: #1e1e1e;        /* Fundo dos cards */
+    --text-color: #F6EFEF;     /* Texto claro */
+    --primary-green: #4AAD4A;  /* Verde destaque */
+    --accent-purple: #9D65C9;  /* Roxo secundário */
+    --glass-bg: rgba(41, 41, 41, 0.77); 
+    
+    /* Fontes */
+    --font-main: 'DM Sans', sans-serif;
 }
 
 * {
@@ -18,255 +22,317 @@ body {
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* --- Botões --- */
-.btn-primary {
-    background-color: var(--primary-green);
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: 800;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-size: 0.8rem;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.btn-secondary {
-    background-color: var(--primary-green);
-    color: #000;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 15px;
+/* --- Header --- */
+.main-header {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
 }
 
-.btn-secondary.small {
-    padding: 8px 16px;
-    font-size: 0.8rem;
-    margin-right: 10px;
-}
-
-/* --- Navbar --- */
-.navbar {
+.header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 5%;
-    background-color: rgba(0,0,0,0.2);
 }
 
-.logo {
-    font-family: 'Courier New', monospace; /* Fonte estilo pixel/code */
-    font-weight: 800;
-    font-size: 1.2rem;
-    color: var(--primary-green);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.purple-text {
-    color: var(--accent-purple);
-}
-
-.pixel-icon {
-    font-size: 1.5rem;
-}
-
-/* --- Hero Section --- */
-.hero {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 60px 10%;
-    flex-wrap: wrap;
-}
-
-.hero-content {
-    flex: 1;
-    min-width: 300px;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.hero-content p {
-    color: #cccccc;
-    max-width: 500px;
-    margin-bottom: 20px;
-}
-
-.hero-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.big-logo-placeholder {
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    font-size: 2rem;
-    color: var(--primary-green);
+.logo-container {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.pixel-icon-large {
-    font-size: 4rem;
+/* Logo do Topo aumentada */
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+.company-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: none; /* Ocultei o texto pois a logo já diz o nome, remova essa linha se quiser o texto também */
+}
+
+/* --- Botão "Cadastre-se" --- */
+.btn-signup {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 180px;
+    height: 50px;
+    background-color: var(--primary-green);
+    color: #292929;
+    border-radius: 8px;
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-signup:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    padding: 80px 0;
+    background: radial-gradient(circle at top right, rgba(76, 175, 81, 0.2), transparent);
+}
+
+.hero-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero-text h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Botão Conheça nosso time */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--primary-green);
+    color: #292929;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 173, 74, 0.4);
 }
 
 /* --- Games Section --- */
 .games-section {
-    padding: 50px 10%;
-    text-align: center;
+    padding: 60px 0;
 }
 
-.games-section h2 {
+.section-title {
+    text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+    font-weight: 700;
 }
 
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
+/* Estilos dos Cards */
 .game-card {
-    height: 350px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    height: 400px;
     position: relative;
     overflow: hidden;
     transition: transform 0.3s;
+    cursor: pointer;
     background-size: cover;
     background-position: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
 .game-card:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
+    z-index: 10;
 }
 
-/* Overlay colorido sobre o card */
 .game-card::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    opacity: 0.7; 
-}
-
-/* Cores alternadas (classes aplicadas via JS ou manual) */
-.card-green::after {
-    background-color: var(--primary-green);
-}
-.card-purple::after {
-    background-color: var(--accent-purple);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
 }
 
 .game-title {
-    position: relative;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
     z-index: 2;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    text-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
+
+.card-green { border-bottom: 4px solid var(--primary-green); }
+.card-purple { border-bottom: 4px solid var(--accent-purple); }
 
 /* --- Footer --- */
-footer {
-    background: linear-gradient(to top, #1a1a1a, transparent);
-    padding: 60px 10% 20px;
+.main-footer {
+    /* Espaçamento e Borda */
+    padding: 60px 0 20px;
     margin-top: 50px;
+    border-top: 1px solid #333;
+
+    /* --- Fundo com Imagem e Overlay --- */
+    /* Usamos 'linear-gradient' para criar a camada escura (0.9 = 90% opacidade) sobre a imagem */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), 
+                url('assets/background-sobre.jpg');
+    
+    /* Configuração para a imagem cobrir tudo e ficar centralizada */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Garante que o texto fique branco para contraste */
+    color: #fff; 
 }
 
-.footer-top {
+/* O restante dos estilos internos do footer continua o mesmo... */
+
+.footer-content {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
     margin-bottom: 40px;
 }
 
+/* Configuração da Logo no Footer */
 .footer-logo {
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: var(--primary-green);
-    margin-bottom: 20px;
-}
-
-.footer-info {
-    max-width: 500px;
-    text-align: right;
-}
-
-.footer-info p {
-    font-size: 0.9rem;
-    color: #ccc;
+    width: 100px;
+    height: auto;
     margin-bottom: 15px;
+    display: block;
 }
 
-.footer-buttons {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.footer-bottom {
-    border-top: 1px solid #333;
-    padding-top: 20px;
+.footer-brand {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    font-size: 0.7rem;
-    color: #888;
+    align-items: flex-start;
 }
 
-.footer-links {
-    margin-bottom: 10px;
-    text-align: center;
+.footer-brand h3 {
+    color: #fff; /* Força o título a ser branco */
 }
 
 .footer-links a {
-    color: #888;
+    color: #aaa; /* Cor cinza claro para os links */
+    margin-left: 20px;
     text-decoration: none;
-    margin: 0 10px;
+    transition: color 0.2s;
 }
 
 .footer-links a:hover {
     color: var(--primary-green);
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .hero-content {
-        margin-bottom: 40px;
-    }
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+    padding-top: 20px;
+    color: #888;
+    font-size: 0.9rem;
+}
 
-    .footer-top {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+/* --- Hero Section (Sobre Nós) --- */
+.hero-section {
+    position: relative;
+    padding: 80px 0;
+    /* Removemos o background: radial-gradient(...) antigo daqui */
+    overflow: hidden; /* Garante que nada vaze pelas bordas */
+}
 
-    .footer-info {
-        text-align: center;
-    }
+.hero-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    position: relative;
+    z-index: 3; /* Z-index alto para o texto ficar na frente de tudo */
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+/* ... estilos de h2 e p permanecem iguais ... */
+.hero-text h2 { font-size: 3rem; margin-bottom: 20px; font-weight: 700; }
+.hero-text p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+/* ......................................... */
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra um pouco mais forte */
+}
+
+/* --- NOVO: Configuração da Imagem de Fundo --- */
+
+/* 1. A div que segura a imagem */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Fica atrás do texto (que é z-index 3) */
     
-    .footer-buttons {
-        justify-content: center;
-    }
+    /* Caminho da imagem */
+    background-image: url('assets/background-sobre.jpg');
+    
+    /* Faz a imagem cobrir tudo sem distorcer */
+    background-size: cover;
+    /* Centraliza a imagem */
+    background-position: center;
+    /* Evita repetição se a imagem for pequena */
+    background-repeat: no-repeat;
+}
+
+/* 2. Camada escura (Overlay) para melhorar a leitura do texto */
+.hero-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Cor preta com 70% de transparência (0.7). Ajuste se ficar muito escuro ou muito claro */
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2; /* Fica sobre a imagem (z-index 1), mas atrás do texto (z-index 3) */
 }
