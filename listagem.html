@@ -6,70 +6,16 @@
     <title>Listagem de Usuários - Mandacaru Games</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
-    
-    <style>
-        .users-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr); /* 7 colunas fixas */
-            gap: 20px;
-            width: 100%;
-            margin-top: 40px;
-            margin-bottom: 60px;
-        }
-
-        .user-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-photo {
-            width: 100%;
-            aspect-ratio: 1 / 1; /* Garante que seja um quadrado perfeito */
-            background-color: #444; /* Cor de fundo cinza escuro */
-            border-radius: 8px; /* Leve arredondamento nas bordas */
-            background-image: url('https://placehold.co/150x150/444/666'); /* Placeholder visual */
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.2s ease;
-        }
-
-        .user-card:hover .user-photo {
-            transform: scale(1.05);
-            border: 2px solid var(--primary-green, #4AAD4A);
-        }
-
-        .user-name {
-            color: var(--text-color, #F6EFEF);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            text-align: center;
-            word-wrap: break-word;
-        }
-
-        /* Ajuste para telas menores (opcional, para não quebrar o layout no celular) */
-        @media (max-width: 900px) {
-            .users-grid {
-                grid-template-columns: repeat(3, 1fr); /* Reduz para 3 colunas em tablets */
-            }
-        }
-        @media (max-width: 600px) {
-            .users-grid {
-                grid-template-columns: repeat(2, 1fr); /* Reduz para 2 colunas em celulares */
-            }
-        }
-    </style>
 </head>
 <body>
 
-<a href="home.html" style="position: absolute; top: 130px; left: 40px; z-index: 2000; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-color, #F6EFEF); font-family: 'DM Sans', sans-serif; font-weight: 600;">
-        <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: auto;">
+    <a href="home.html" class="btn-back-home">
+        <svg viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M4.82757 16.97L18.9696 31.112L16.1416 33.94L0.585573 18.384C0.210631 18.0089 0 17.5003 0 16.97C0 16.4397 0.210631 15.9311 0.585573 15.556L16.1416 0L18.9696 2.828L4.82757 16.97Z" fill="currentColor"/>
         </svg>
         Retornar a página inicial
     </a>
+
     <header class="main-header">
         <div class="container header-content">
             <div class="logo-container">
@@ -83,20 +29,20 @@
     </header>
 
     <main>
-        <section class="cadastro-hero" style="min-height: auto; height: auto; padding-bottom: 100px;">
+        <section class="cadastro-hero">
             <div class="hero-overlay"></div>
             <div class="container hero-content-centered">
-                <div data-layer="Aqueles que sonham com a gente!" class="FaAParteDoNossoSonho" style="width: 100%; max-width: 1210px; text-align: center; color: var(--text-color); font-size: 70px; font-family: 'DM Sans', sans-serif; font-weight: 600; word-wrap: break-word; margin-bottom: 20px;">
+                <div class="hero-big-title">
                     Aqueles que sonham com a gente!
                 </div>
-                <div data-layer="Cadastre-se para se tornar parte da nossa família!" class="CadastreSeParaSeTornarParteDaNossaFamLia" style="width: 100%; max-width: 1099.98px; text-align: center; color: var(--text-color); font-size: 20px; font-family: 'DM Sans', sans-serif; font-weight: 600; word-wrap: break-word; margin-bottom: 20px;">
+                <div class="hero-subtitle">
                     Conheça nossos membros
                 </div>
-                <div data-layer="Política de Privacidade" class="PolTicaDePrivacidade" style="width: 100%; max-width: 1099.98px; text-align: center; color: var(--text-color); font-size: 16px; font-family: 'Montserrat', sans-serif; font-weight: 400; text-decoration: underline; word-wrap: break-word; cursor: pointer; margin-bottom: 60px;">
+                <div class="hero-link-policy">
                     Política de Privacidade
                 </div>
 
-                <div data-layer="Mandacaru da Fama" class="MandacaruDaFama" style="align-self: stretch; text-align: center; color: var(--Fundo, #F6EFEF); font-size: 32px; font-family: DM Sans; font-weight: 400; word-wrap: break-word; margin-bottom: 30px;">
+                <div class="hero-subtitle" style="font-size: 32px; font-weight: 400; margin-top: 30px;">
                     Mandacaru da Fama
                 </div>
 
@@ -108,7 +54,6 @@
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Lucas Pereira</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Julia Lima</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Marcos Costa</span></div>
-
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Fernanda Alves</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Gabriel R.</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Larissa Ferreira</span></div>
@@ -116,7 +61,6 @@
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Patrícia B.</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Bruno Martins</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Camila Rocha</span></div>
-
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Thiago Ribeiro</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Beatriz M.</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Rodrigo C.</span></div>
@@ -125,7 +69,7 @@
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Renata C.</span></div>
                     <div class="user-card"><div class="user-photo"></div><span class="user-name">Gustavo Ramos</span></div>
                 </div>
-                </div>
+            </div>
         </section>
     </main>
 
@@ -145,17 +89,12 @@
                 </div>
                 <div class="footer-legal-links">
                     <a href="#">Política de Privacidade</a>
-                    <a href="#">Termos de Serviço</a>
-                    <a href="#">Política de Cookies</a>
+                    <a href="#">Informação legal e de privacidade</a>
+                    <a href="#">Contrato do Usuário</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">Atualizações do serviço online de segurança</a>
                 </div>
-                <div class="footer-bottom">
-                    <span>© 2024 Mandacaru Games</span>
-                    <div class="social-icons">
-                        <span style="color: #C67DFF;">Instagram</span>
-                        <span style="color: #C67DFF;">Twitter</span>
-                        <span style="color: #C67DFF;">LinkedIn</span>
-                    </div>
-                </div>
+                <p class="footer-copyright" style="text-align: center; margin-top: 20px;">© 2026 Mandacaru Games Inc.</p>
             </div>
         </div>
     </footer>

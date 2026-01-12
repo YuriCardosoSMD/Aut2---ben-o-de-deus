@@ -1,13 +1,14 @@
 :root {
     /* Cores do Design */
-    --bg-color: #252525;       /* Fundo geral */
-    --card-bg: #1e1e1e;        /* Fundo dos cards */
-    --text-color: #F6EFEF;     /* Texto claro */
-    --primary-green: #4AAD4A;  /* Verde destaque */
-    --accent-purple: #9D65C9;  /* Roxo secundário */
+    --bg-color: #252525;
+    --card-bg: #1e1e1e;
+    --text-color: #F6EFEF;
+    --primary-green: #4AAD4A;
+    --accent-purple: #9D65C9;
     
     /* Fontes */
     --font-main: 'DM Sans', sans-serif;
+    --font-sec: 'Montserrat', sans-serif;
 }
 
 * {
@@ -24,10 +25,51 @@ body {
     overflow-x: hidden;
 }
 
+/* Garante que imagens nunca estourem a tela */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* --- Botão de Retornar (Link com seta) --- */
+.btn-back-home {
+    position: absolute;
+    top: 130px;
+    left: 40px;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.btn-back-home:hover {
+    color: var(--primary-green);
+}
+
+.btn-back-home svg {
+    height: 20px;
+    width: auto;
+}
+
+/* Ajuste do botão voltar para celulares */
+@media (max-width: 768px) {
+    .btn-back-home {
+        position: relative; /* Deixa de flutuar solto */
+        top: auto;
+        left: auto;
+        margin: 20px 20px 0 20px; /* Margem simples */
+    }
 }
 
 /* --- Header --- */
@@ -54,7 +96,6 @@ body {
 
 .logo {
     width: 150px;
-    height: auto;
 }
 
 .company-name {
@@ -63,18 +104,16 @@ body {
     display: none; 
 }
 
-/* --- Botão "Cadastre-se" --- */
+/* Botão "Cadastre-se" */
 .btn-signup {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     width: 180px;
     height: 50px;
     background-color: var(--primary-green);
     color: #292929;
     border-radius: 8px;
-    font-family: var(--font-main);
     font-weight: 600;
     font-size: 20px;
     text-decoration: none;
@@ -86,40 +125,49 @@ body {
     box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
 }
 
-/* --- Hero Section (Sobre Nós + Logo) --- */
+/* Responsividade Header */
+@media (max-width: 480px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn-signup {
+        width: 100%;
+    }
+}
+
+/* --- Hero Section Geral --- */
 .hero-section {
     position: relative;
     padding: 80px 0;
     overflow: hidden; 
-    /* Imagem de Fundo Adicionada */
     background-image: url('assets/background-sobre.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.hero-section .hero-overlay {
+.hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Escurece a imagem (ajuste o 0.7 se quiser mais claro/escuro) */
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1;
 }
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Divide em 2 colunas de 50% */
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
     align-items: center;
     position: relative;
-    z-index: 2; /* Garante que o texto fique acima do overlay */
+    z-index: 2;
 }
 
 .hero-text {
     text-align: left;
-    padding-right: 20px;
 }
 
 .hero-text h2 {
@@ -127,31 +175,28 @@ body {
     font-weight: 700;
     color: var(--primary-green);
     margin-bottom: 20px;
-    font-family: 'DM Sans', sans-serif;
 }
 
 .hero-text p {
     font-size: 1.25rem;
-    line-height: 1.6;
     margin-bottom: 30px;
-    color: var(--text-color);
 }
 
-.hero-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Responsividade Hero Home */
+@media (max-width: 900px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .hero-image {
+        order: -1; /* Imagem vai para cima no celular */
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .hero-text h2 { font-size: 2.5rem; }
 }
 
-.hero-image img {
-    width: 100%;
-    max-width: 550px;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(74, 173, 74, 0.2)); 
-}
-
-/* Botão "Conheça nosso time" */
 .btn-primary {
     display: inline-flex;
     justify-content: center;
@@ -164,7 +209,6 @@ body {
     text-decoration: none;
     border-radius: 8px;
     transition: transform 0.2s, box-shadow 0.2s;
-    font-family: 'DM Sans', sans-serif;
 }
 
 .btn-primary:hover {
@@ -173,30 +217,19 @@ body {
     filter: brightness(1.1);
 }
 
-/* --- Hero Section Cadastro --- */
+/* --- Hero Section (Cadastro e Listagem) --- */
 .cadastro-hero {
     position: relative;
     width: 100%;
-    min-height: 400px; 
+    /* min-height removido para ser flexível */
+    padding: 60px 20px 100px 20px; 
     display: flex;
     align-items: center;
     justify-content: center;
     background-image: url('assets/background-sobre.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    padding: 60px 20px; 
     text-align: center;
-}
-
-.cadastro-hero .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1;
 }
 
 .hero-content-centered {
@@ -205,150 +238,186 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
 }
 
-/* --- Seção de Jogos (Estilo "Celeste") --- */
+/* Classes para substituir estilos inline */
+.hero-big-title {
+    font-size: 72px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    max-width: 1210px;
+    word-wrap: break-word;
+}
+.hero-subtitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    max-width: 1100px;
+}
+.hero-link-policy {
+    font-family: var(--font-sec);
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+/* Responsividade dos Textos Hero */
+@media (max-width: 768px) {
+    .hero-big-title {
+        font-size: 42px; /* Reduz fonte */
+    }
+    .hero-subtitle {
+        font-size: 18px;
+    }
+}
+@media (max-width: 480px) {
+    .hero-big-title {
+        font-size: 32px;
+    }
+}
+
+/* --- Listagem de Usuários --- */
+.users-grid {
+    display: grid;
+    /* Auto-fill cria colunas responsivas automaticamente */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+    gap: 20px;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    background-color: #444;
+    border-radius: 8px;
+    background-image: url('https://placehold.co/150x150/444/666');
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.2s ease;
+}
+
+.user-card:hover .user-photo {
+    transform: scale(1.05);
+    border: 2px solid var(--primary-green);
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* --- Jogos (Home) --- */
 .games-section {
     padding: 60px 0;
     text-align: center;
 }
-
 .section-title {
     font-size: 32px;
-    font-weight: 600;
-    color: var(--text-color);
     margin-bottom: 40px;
-    font-family: 'DM Sans', sans-serif;
 }
 
 .games-grid {
     display: grid;
-    /* Cria 3 colunas de tamanho igual */
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     max-width: 900px;
     margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+    .games-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .games-grid { grid-template-columns: 1fr; } /* 1 coluna no celular */
 }
 
 .game-card {
     position: relative;
     aspect-ratio: 3 / 4; 
     border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
     background-size: cover;
     background-position: center;
     background-blend-mode: hard-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
 }
-
-.game-card:hover {
-    transform: scale(1.03);
-}
-
-.card-green {
-    background-color: var(--primary-green);
-}
-
-.card-purple {
-    background-color: var(--accent-purple);
-}
-
+.game-card:hover { transform: scale(1.03); }
+.card-green { background-color: var(--primary-green); }
+.card-purple { background-color: var(--accent-purple); }
 .game-title {
-    position: relative;
     z-index: 2;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 24px;
+    color: #1a1a1a;
     font-weight: 700;
-    color: #1a1a1a; 
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+    font-size: 24px;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.2);
 }
 
-/* =========================================
-   ESTILOS DO FORMULÁRIO
-   ========================================= */
+/* --- Formulários --- */
 .form-layout-section {
     padding: 60px 0;
     background-color: var(--bg-color);
 }
 .form-main-title {
-    color: #F6EFEF;
     font-size: 32px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
     margin-bottom: 40px;
+    text-align: center;
 }
 .forms-grid {
     display: flex;
-    flex-wrap: wrap;
     gap: 40px;
+    justify-content: space-between;
 }
 .form-column-left, .form-column-right {
     flex: 1;
-    min-width: 300px;
 }
-.form-subtitle {
-    color: #F6EFEF;
-    font-size: 24px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
-    margin-bottom: 30px;
+
+/* Responsividade Formulário */
+@media (max-width: 768px) {
+    .forms-grid {
+        flex-direction: column; /* Um embaixo do outro */
+        gap: 60px;
+    }
 }
+
 .input-group {
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 .input-label-text {
-    align-self: stretch;
-    color: #F6EFEF;
     font-size: 20px;
-    font-family: 'DM Sans', sans-serif;
     font-weight: 600;
     margin-bottom: 8px;
 }
 .styled-input {
     width: 100%;
-    max-width: 586px; 
+    /* max-width: 586px removido para ocupar espaço total */
     height: 43px;
     background: #C3C3C3;
     border-radius: 8px;
     border: none;
     padding: 0 12px;
-    color: #000;
-    font-family: 'DM Sans', sans-serif;
     font-size: 16px;
-}
-.styled-input::placeholder {
-    color: #575757;
+    color: #000;
 }
 .styled-input:focus {
     outline: 2px solid var(--primary-green);
 }
-.file-input-styled {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    overflow: hidden;
-}
-.hidden-file-input {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0; cursor: pointer;
-}
-.error-text-red {
-    color: #FF0000;
-    font-size: 16px;
-    font-family: 'DM Sans', sans-serif;
-    margin-bottom: 5px;
-}
+
 .checkbox-wrapper-styled {
     display: flex;
     align-items: center;
@@ -356,9 +425,7 @@ body {
     margin-bottom: 20px;
     cursor: pointer;
 }
-.hidden-checkbox-input {
-    position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;
-}
+.hidden-checkbox-input { display: none; } /* Checkbox real escondido */
 .checkbox-icon {
     display: flex; align-items: center; justify-content: center;
     color: var(--text-color);
@@ -370,9 +437,47 @@ body {
     fill: var(--primary-green);
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
+/* Botões do Rodapé do Formulário */
+.form-footer-actions {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+.btn-action-container {
+    display: flex;
+    gap: 30px;
+}
+@media (max-width: 480px) {
+    .btn-action-container {
+        flex-direction: column;
+        width: 100%;
+    }
+    .btn-action-container button {
+        width: 100%;
+    }
+    .BotO {
+        width: 100% !important; /* Força largura total no mobile */
+    }
+}
+
+.BotO {
+    width: 180px;
+    height: 50px;
+    background: var(--primary-green);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #292929;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.3);
+}
+
+/* --- Footer --- */
 .main-footer {
     position: relative;
     padding: 80px 0;
@@ -380,71 +485,46 @@ body {
     background-image: url('assets/background-sobre.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
 }
 .footer-overlay {
-    position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: 1;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); z-index: 1;
 }
 .footer-content {
     position: relative; z-index: 2;
     display: flex; justify-content: space-between;
-    align-items: flex-start; flex-wrap: wrap; gap: 40px;
+    flex-wrap: wrap; gap: 40px;
 }
 .footer-logo-big {
-    width: 280px; height: auto; display: block; margin-top: 80px; 
+    width: 280px; margin-top: 80px; 
 }
 .footer-right {
     flex: 1; display: flex; flex-direction: column; gap: 30px; max-width: 800px;
 }
-.footer-headline {
-    font-size: 20px; font-weight: 600; line-height: 1.4;
-}
 .footer-actions {
-    display: flex; gap: 50px; flex-wrap: wrap; margin-left: 50px; 
+    display: flex; gap: 50px; flex-wrap: wrap; margin-left: 50px;
 }
+
+@media (max-width: 900px) {
+    .footer-content { flex-direction: column; align-items: center; text-align: center; }
+    .footer-logo-big { margin-top: 0; width: 200px; }
+    .footer-actions { margin-left: 0; justify-content: center; gap: 20px; }
+}
+
 .btn-footer {
     display: inline-flex; justify-content: center; align-items: center;
     width: 180px; height: 50px; background-color: var(--primary-green);
-    color: #292929; font-family: var(--font-main); font-size: 20px;
-    font-weight: 600; text-decoration: none; border-radius: 8px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30); transition: transform 0.2s;
-}
-.btn-footer:hover {
-    transform: translateY(-3px); filter: brightness(1.1);
+    color: #292929; font-weight: 600; text-decoration: none; border-radius: 8px;
 }
 .footer-legal-links {
-    display: flex; flex-wrap: wrap; gap: 20px 30px;
+    display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
 }
-.footer-legal-links a {
-    color: var(--text-color); font-size: 16px; text-decoration: none; opacity: 0.9;
-}
-.footer-legal-links a:hover { text-decoration: underline; opacity: 1; }
-.footer-copyright { font-size: 16px; opacity: 0.7; margin-top: 10px; }
+.footer-legal-links a { color: var(--text-color); text-decoration: none; }
+.social-icons { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
 
-/* Responsividade */
-@media (max-width: 900px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    .hero-text {
-        padding-right: 0; margin-bottom: 40px;
-    }
-    .hero-image {
-        order: -1; margin-bottom: 20px;
-    }
-    .games-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .footer-content { flex-direction: column; }
-    .footer-logo-big { width: 200px; margin-top: 0; margin-bottom: 20px; }
-    .footer-actions { margin-left: 0; justify-content: center; }
-}
-@media (max-width: 600px) {
-    .games-grid {
-        grid-template-columns: 1fr;
-    }
+/* Mensagens de erro senha */
+.error-text-red {
+    color: #FF0000;
+    font-size: 14px;
+    margin-bottom: 5px;
 }

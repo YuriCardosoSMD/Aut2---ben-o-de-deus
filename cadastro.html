@@ -8,12 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <a href="home.html" style="position: absolute; top: 130px; left: 40px; z-index: 2000; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-color, #F6EFEF); font-family: 'DM Sans', sans-serif; font-weight: 600;">
-        <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: auto;">
+    <a href="home.html" class="btn-back-home">
+        <svg viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M4.82757 16.97L18.9696 31.112L16.1416 33.94L0.585573 18.384C0.210631 18.0089 0 17.5003 0 16.97C0 16.4397 0.210631 15.9311 0.585573 15.556L16.1416 0L18.9696 2.828L4.82757 16.97Z" fill="currentColor"/>
         </svg>
         Retornar a página inicial
     </a>
+
     <header class="main-header">
         <div class="container header-content">
             <div class="logo-container">
@@ -30,13 +31,13 @@
         <section class="cadastro-hero">
             <div class="hero-overlay"></div>
             <div class="container hero-content-centered">
-                <div data-layer="Faça parte do nosso sonho!" class="FaAParteDoNossoSonho" style="width: 100%; max-width: 1210px; text-align: center; color: var(--text-color); font-size: 72px; font-family: 'DM Sans', sans-serif; font-weight: 600; word-wrap: break-word; margin-bottom: 20px;">
+                <div class="hero-big-title">
                     Faça parte do nosso sonho!
                 </div>
-                <div data-layer="Cadastre-se para se tornar parte da nossa família!" class="CadastreSeParaSeTornarParteDaNossaFamLia" style="width: 100%; max-width: 1099.98px; text-align: center; color: var(--text-color); font-size: 20px; font-family: 'DM Sans', sans-serif; font-weight: 600; word-wrap: break-word; margin-bottom: 20px;">
+                <div class="hero-subtitle">
                     Cadastre-se para se tornar parte da nossa família!
                 </div>
-                <div data-layer="Política de Privacidade" class="PolTicaDePrivacidade" style="width: 100%; max-width: 1099.98px; text-align: center; color: var(--text-color); font-size: 16px; font-family: 'Montserrat', sans-serif; font-weight: 400; text-decoration: underline; word-wrap: break-word; cursor: pointer;">
+                <div class="hero-link-policy">
                     Política de Privacidade
                 </div>
             </div>
@@ -45,19 +46,15 @@
         <section class="form-layout-section">
             <div class="container">
                 
-                <div data-layer="Formulário de Preenchimento" class="form-main-title">
+                <div class="form-main-title">
                     Formulário de Preenchimento
                 </div>
 
                 <div class="forms-grid">
                     <div class="form-column-left">
-                        
-                        <div data-layer="Informações Pessoais" class="form-subtitle">
-                            Informações Pessoais
-                        </div>
+                        <h3 class="input-label-text" style="font-size: 24px; font-weight: 400; margin-bottom: 30px;">Informações Pessoais</h3>
                         
                         <form id="personalInfoForm" class="styled-form">
-                            
                             <div class="input-group">
                                 <label for="nome" class="input-label-text">Nome Completo</label>
                                 <input type="text" id="nome" class="styled-input" placeholder="Digite seu nome completo">
@@ -65,14 +62,14 @@
 
                             <div class="input-group">
                                 <label for="email" class="input-label-text">E-mail</label>
-                                <input type="email" id="email" class="styled-input" placeholder='"ccc@ddd.ccc" (caracteres, arroba, domínio, ponto, extensão)'>
+                                <input type="email" id="email" class="styled-input" placeholder="exemplo@dominio.com">
                             </div>
 
                             <div class="input-group">
                                 <label for="foto" class="input-label-text">Foto</label>
-                                <div class="file-input-styled styled-input">
-                                    <span class="file-placeholder-text">Adicione uma foto até 5MB</span>
-                                    <input type="file" id="foto" class="hidden-file-input">
+                                <div class="styled-input" style="display: flex; align-items: center; position: relative;">
+                                    <span style="color: #575757;">Adicione uma foto até 5MB</span>
+                                    <input type="file" id="foto" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;">
                                 </div>
                             </div>
 
@@ -81,38 +78,29 @@
                                 <input type="password" id="senha" class="styled-input" placeholder="Crie uma senha forte">
                             </div>
 
-                            <div class="password-requirements-list">
+                            <div class="password-requirements-list" style="margin-bottom: 20px;">
                                 <div class="error-text-red">A senha deve possuir 10 caracteres.</div>
                                 <div class="error-text-red">A senha deve possuir letras maiúsculas.</div>
                                 <div class="error-text-red">A senha deve possuir números.</div>
                                 <div class="error-text-red">
-                                    A senha deve possuir caracteres especiais 
-                                    <span style="font-family: 'Montserrat', sans-serif;">(apenas *, ;, # são permitidos</span>).
+                                    A senha deve possuir caracteres especiais (*, ;, #).
                                 </div>
-                                <div class="error-text-red">A senha digitada deve ser igual a anterior.</div>
                             </div>
 
                             <div class="input-group">
                                 <label for="senha-confirm" class="input-label-text">Repita sua senha</label>
                                 <input type="password" id="senha-confirm" class="styled-input" placeholder="Digite a senha criada anteriormente">
                             </div>
-
-                            <div class="error-text-red">A senha digitada deve ser igual a anterior.</div>
-
                         </form>
                     </div>
 
                     <div class="form-column-right">
-                        
-                        <div data-layer="Endereço" class="form-subtitle" style="text-align: center;">
-                            Endereço
-                        </div>
+                        <h3 class="input-label-text" style="font-size: 24px; font-weight: 400; margin-bottom: 30px; text-align: center;">Endereço</h3>
 
                         <form id="addressForm" class="styled-form">
-
                             <div class="input-group">
                                 <label for="cep" class="input-label-text">CEP</label>
-                                <input type="text" id="cep" class="styled-input" placeholder="0000-000">
+                                <input type="text" id="cep" class="styled-input" placeholder="00000-000">
                             </div>
 
                             <div class="input-group">
@@ -122,77 +110,54 @@
 
                             <div class="input-group">
                                 <label for="numero" class="input-label-text">Número</label>
-                                <input type="text" id="numero" class="styled-input" placeholder="Digite o número de sua residencia">
+                                <input type="text" id="numero" class="styled-input" placeholder="Número">
                             </div>
 
                             <label class="checkbox-wrapper-styled">
                                 <input type="checkbox" id="sem-numero" class="hidden-checkbox-input">
-                                <div data-svg-wrapper class="checkbox-icon">
+                                <div class="checkbox-icon">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 18C1.45 18 0.979333 17.8043 0.588 17.413C0.196667 17.0217 0.000666667 16.5507 0 16V2C0 1.45 0.196 0.979333 0.588 0.588C0.98 0.196667 1.45067 0.000666667 2 0H16C16.55 0 17.021 0.196 17.413 0.588C17.805 0.98 18.0007 1.45067 18 2V16C18 16.55 17.8043 17.021 17.413 17.413C17.0217 17.805 16.5507 18.0007 16 18H2ZM2 16H16V2H2V16Z" fill="currentColor"/>
                                     </svg>
                                 </div>
-                                <span class="checkbox-label-text">Não se aplica</span>
+                                <span>Não se aplica</span>
                             </label>
 
                             <div class="input-group">
                                 <label for="bairro" class="input-label-text">Bairro</label>
-                                <input type="text" id="bairro" class="styled-input" placeholder="Digite seu bairro">
+                                <input type="text" id="bairro" class="styled-input" placeholder="Seu bairro">
                             </div>
 
                             <div class="input-group">
                                 <label for="cidade" class="input-label-text">Cidade</label>
-                                <input type="text" id="cidade" class="styled-input" placeholder="Digite sua Cidade">
+                                <input type="text" id="cidade" class="styled-input" placeholder="Sua cidade">
                             </div>
-
                         </form>
                     </div>
                 </div>
-                <div class="form-footer-actions" style="margin-top: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;">
-                    
-                    <div data-layer="Você autoriza a utilização de seu nome e foto para integrar nossos membros no site?" class="VocAutorizaAUtilizaODeSeuNomeEFotoParaIntegrarNossosMembrosNoSite" style="color: var(--Fundo, #F6EFEF); font-size: 16px; font-family: DM Sans; font-weight: 400; word-wrap: break-word">
-                        Você autoriza a utilização de seu nome e foto para integrar nossos membros no site?
-                    </div>
-                    
-                    <div data-layer="Política de Privacidade" class="PolTicaDePrivacidade" style="color: var(--Fundo, #F6EFEF); font-size: 16px; font-family: Montserrat; font-weight: 400; text-decoration: underline; word-wrap: break-word; cursor: pointer;">
-                        Política de Privacidade
-                    </div>
-                    
-                    <div style="display: flex; gap: 30px; margin-top: 10px; margin-bottom: 20px;">
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                            <div data-svg-wrapper data-layer="Vector" class="Vector">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 18C1.45 18 0.979333 17.8043 0.588 17.413C0.196667 17.0217 0.000666667 16.5507 0 16V2C0 1.45 0.196 0.979333 0.588 0.588C0.98 0.196667 1.45067 0.000666667 2 0H16C16.55 0 17.021 0.196 17.413 0.588C17.805 0.98 18.0007 1.45067 18 2V16C18 16.55 17.8043 17.021 17.413 17.413C17.0217 17.805 16.5507 18.0007 16 18H2ZM2 16H16V2H2V16Z" fill="var(--text-color, #F6EFEF)"/>
-                                </svg>
-                            </div>
-                            <div data-layer="Sim" class="Sim" style="color: var(--Fundo, #F6EFEF); font-size: 16px; font-family: DM Sans; font-weight: 400; word-wrap: break-word">Sim</div>
-                        </label>
 
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                            <div data-svg-wrapper data-layer="Vector" class="Vector">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 18C1.45 18 0.979333 17.8043 0.588 17.413C0.196667 17.0217 0.000666667 16.5507 0 16V2C0 1.45 0.196 0.979333 0.588 0.588C0.98 0.196667 1.45067 0.000666667 2 0H16C16.55 0 17.021 0.196 17.413 0.588C17.805 0.98 18.0007 1.45067 18 2V16C18 16.55 17.8043 17.021 17.413 17.413C17.0217 17.805 16.5507 18.0007 16 18H2ZM2 16H16V2H2V16Z" fill="var(--text-color, #F6EFEF)"/>
-                                </svg>
-                            </div>
-                            <div data-layer="Não" class="NO" style="color: var(--Fundo, #F6EFEF); font-size: 16px; font-family: DM Sans; font-weight: 400; word-wrap: break-word">Não</div>
+                <div class="form-footer-actions">
+                    <p>Você autoriza a utilização de seu nome e foto para integrar nossos membros no site?</p>
+                    <div style="display: flex; gap: 30px; margin-bottom: 20px;">
+                        <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                            <input type="radio" name="autoriza" value="sim" style="accent-color: var(--primary-green);"> Sim
+                        </label>
+                        <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                            <input type="radio" name="autoriza" value="nao" style="accent-color: var(--primary-green);"> Não
                         </label>
                     </div>
 
-                    <div style="display: flex; gap: 60px;">
+                    <div class="btn-action-container">
                         <button type="button" id="btnLimpar" style="background: none; border: none; padding: 0; cursor: pointer;">
-                            <div data-layer="Botão" data-property-1="Default" class="BotO" style="width: 180px; height: 50px; padding-left: 8px; padding-right: 8px; padding-top: 12px; padding-bottom: 12px; background: var(--Destaque, #4AAD4A); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30); overflow: hidden; border-radius: 8px; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
-                                <div data-layer="Botão genérico" class="BotOGenRico" style="color: var(--Texto, #292929); font-size: 20px; font-family: DM Sans; font-weight: 600; word-wrap: break-word">Limpar</div>
-                            </div>
+                            <div class="BotO">Limpar</div>
                         </button>
-
                         <button type="submit" id="btnEnviar" form="personalInfoForm" style="background: none; border: none; padding: 0; cursor: pointer;">
-                            <div data-layer="Botão" data-property-1="Default" class="BotO" style="width: 180px; height: 50px; padding-left: 8px; padding-right: 8px; padding-top: 12px; padding-bottom: 12px; background: var(--Destaque, #4AAD4A); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30); overflow: hidden; border-radius: 8px; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
-                                <div data-layer="Botão genérico" class="BotOGenRico" style="color: var(--Texto, #292929); font-size: 20px; font-family: DM Sans; font-weight: 600; word-wrap: break-word">Enviar</div>
-                            </div>
+                            <div class="BotO">Enviar</div>
                         </button>
-                    </div>
                     </div>
                 </div>
+
+            </div>
         </section>
     </main>
 
@@ -217,7 +182,7 @@
                     <a href="#">Cookies</a>
                     <a href="#">Atualizações do serviço online de segurança</a>
                 </div>
-                <p class="footer-copyright">© 2026 Mandacaru games Inc.</p>
+                <p class="footer-copyright" style="text-align: center; margin-top: 20px;">© 2026 Mandacaru Games Inc.</p>
             </div>
         </div>
     </footer>
