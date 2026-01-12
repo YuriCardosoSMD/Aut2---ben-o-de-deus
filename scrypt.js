@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (gamesGrid) {
         // Lista com 9 jogos para preencher a grade 3x3
         const games = [
-            { title: "Celeste", color: "green" },
-            { title: "Celeste", color: "purple" },
-            { title: "Celeste", color: "green" },
-            { title: "Celeste", color: "green" },
-            { title: "Celeste", color: "purple" },
-            { title: "Celeste", color: "green" },
-            { title: "Celeste", color: "green" },
-            { title: "Celeste", color: "purple" },
-            { title: "Celeste", color: "green" }
+            { title: "A Flor da Meia-Noite", color: "green" },
+            { title: "Veredas de Espinho", color: "purple" },
+            { title: "Sombra do Agreste", color: "green" },
+            { title: "Terra Rachada", color: "green" },
+            { title: "Lâmina do Sol", color: "purple" },
+            { title: "Raízes de Pedra", color: "green" },
+            { title: "Neon Caatinga", color: "green" },
+            { title: "A Última Gota", color: "purple" },
+            { title: "Asa Branca: A Jornada", color: "green" }
         ];
 
         games.forEach((game) => {
