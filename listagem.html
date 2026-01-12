@@ -6,9 +6,70 @@
     <title>Listagem de Usuários - Mandacaru Games</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 colunas fixas */
+            gap: 20px;
+            width: 100%;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+
+        .user-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-photo {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Garante que seja um quadrado perfeito */
+            background-color: #444; /* Cor de fundo cinza escuro */
+            border-radius: 8px; /* Leve arredondamento nas bordas */
+            background-image: url('https://placehold.co/150x150/444/666'); /* Placeholder visual */
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.2s ease;
+        }
+
+        .user-card:hover .user-photo {
+            transform: scale(1.05);
+            border: 2px solid var(--primary-green, #4AAD4A);
+        }
+
+        .user-name {
+            color: var(--text-color, #F6EFEF);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        /* Ajuste para telas menores (opcional, para não quebrar o layout no celular) */
+        @media (max-width: 900px) {
+            .users-grid {
+                grid-template-columns: repeat(3, 1fr); /* Reduz para 3 colunas em tablets */
+            }
+        }
+        @media (max-width: 600px) {
+            .users-grid {
+                grid-template-columns: repeat(2, 1fr); /* Reduz para 2 colunas em celulares */
+            }
+        }
+    </style>
 </head>
 <body>
 
+<a href="home.html" style="position: absolute; top: 130px; left: 40px; z-index: 2000; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-color, #F6EFEF); font-family: 'DM Sans', sans-serif; font-weight: 600;">
+        <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: auto;">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.82757 16.97L18.9696 31.112L16.1416 33.94L0.585573 18.384C0.210631 18.0089 0 17.5003 0 16.97C0 16.4397 0.210631 15.9311 0.585573 15.556L16.1416 0L18.9696 2.828L4.82757 16.97Z" fill="currentColor"/>
+        </svg>
+        Retornar a página inicial
+    </a>
     <header class="main-header">
         <div class="container header-content">
             <div class="logo-container">
@@ -22,23 +83,49 @@
     </header>
 
     <main>
-        <section class="listing-section" style="padding: 100px 0; min-height: 60vh;">
-            <div class="container">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-                    <h2 style="color: var(--text-color, #F6EFEF); font-family: 'DM Sans', sans-serif;">Listagem de Usuários</h2>
-                    
-                    <a href="home.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-color, #F6EFEF); font-family: 'DM Sans', sans-serif; font-weight: 600;">
-                        <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 20px; width: auto;">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.82757 16.97L18.9696 31.112L16.1416 33.94L0.585573 18.384C0.210631 18.0089 0 17.5003 0 16.97C0 16.4397 0.210631 15.9311 0.585573 15.556L16.1416 0L18.9696 2.828L4.82757 16.97Z" fill="currentColor"/>
-                        </svg>
-                        Retornar a página inicial
-                    </a>
+        <section class="cadastro-hero" style="min-height: auto; height: auto; padding-bottom: 100px;">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content-centered">
+                <div data-layer="Aqueles que sonham com a gente!" class="FaAParteDoNossoSonho" style="width: 100%; max-width: 1210px; text-align: center; color: var(--text-color); font-size: 70px; font-family: 'DM Sans', sans-serif; font-weight: 600; word-wrap: break-word; margin-bottom: 20px;">
+                    Aqueles que sonham com a gente!
+                </div>
+                <div data-layer="Cadastre-se para se tornar parte da nossa família!" class="CadastreSeParaSeTornarParteDaNossaFamLia" style="width: 100%; max-width: 1099.98px; text-align: center; color: var(--text-color); font-size: 20px; font-family: 'DM Sans', sans-serif; font-weight: 600; word-wrap: break-word; margin-bottom: 20px;">
+                    Conheça nossos membros
+                </div>
+                <div data-layer="Política de Privacidade" class="PolTicaDePrivacidade" style="width: 100%; max-width: 1099.98px; text-align: center; color: var(--text-color); font-size: 16px; font-family: 'Montserrat', sans-serif; font-weight: 400; text-decoration: underline; word-wrap: break-word; cursor: pointer; margin-bottom: 60px;">
+                    Política de Privacidade
                 </div>
 
-                <div id="listagem-usuarios" style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 40px; min-height: 200px;">
-                    <p style="color: #fff; text-align: center;">Carregando lista...</p>
+                <div data-layer="Mandacaru da Fama" class="MandacaruDaFama" style="align-self: stretch; text-align: center; color: var(--Fundo, #F6EFEF); font-size: 32px; font-family: DM Sans; font-weight: 400; word-wrap: break-word; margin-bottom: 30px;">
+                    Mandacaru da Fama
                 </div>
-            </div>
+
+                <div class="users-grid">
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">João Silva</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Maria Santos</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Pedro Oliveira</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Ana Souza</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Lucas Pereira</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Julia Lima</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Marcos Costa</span></div>
+
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Fernanda Alves</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Gabriel R.</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Larissa Ferreira</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Rafael Gomes</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Patrícia B.</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Bruno Martins</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Camila Rocha</span></div>
+
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Thiago Ribeiro</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Beatriz M.</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Rodrigo C.</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Mariana A.</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Felipe Mendes</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Renata C.</span></div>
+                    <div class="user-card"><div class="user-photo"></div><span class="user-name">Gustavo Ramos</span></div>
+                </div>
+                </div>
         </section>
     </main>
 
