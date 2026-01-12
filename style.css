@@ -86,11 +86,91 @@ body {
     box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
 }
 
-/* --- Hero Section Geral --- */
+/* --- Hero Section (Sobre Nós + Logo) --- */
 .hero-section {
     position: relative;
     padding: 80px 0;
     overflow: hidden; 
+    /* Imagem de Fundo Adicionada */
+    background-image: url('assets/background-sobre.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-section .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Escurece a imagem (ajuste o 0.7 se quiser mais claro/escuro) */
+    z-index: 1;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide em 2 colunas de 50% */
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 2; /* Garante que o texto fique acima do overlay */
+}
+
+.hero-text {
+    text-align: left;
+    padding-right: 20px;
+}
+
+.hero-text h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(74, 173, 74, 0.2)); 
+}
+
+/* Botão "Conheça nosso time" */
+.btn-primary {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-green);
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
+    filter: brightness(1.1);
 }
 
 /* --- Hero Section Cadastro --- */
@@ -129,67 +209,102 @@ body {
     width: 100%;
 }
 
-@media (max-width: 768px) {
-    .FaAParteDoNossoSonho {
-        font-size: 42px !important;
-    }
-    .CadastreSeParaSeTornarParteDaNossaFamLia {
-        font-size: 18px !important;
-    }
+/* --- Seção de Jogos (Estilo "Celeste") --- */
+.games-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 40px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.games-grid {
+    display: grid;
+    /* Cria 3 colunas de tamanho igual */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.game-card {
+    position: relative;
+    aspect-ratio: 3 / 4; 
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: hard-light;
+}
+
+.game-card:hover {
+    transform: scale(1.03);
+}
+
+.card-green {
+    background-color: var(--primary-green);
+}
+
+.card-purple {
+    background-color: var(--accent-purple);
+}
+
+.game-title {
+    position: relative;
+    z-index: 2;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a; 
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 /* =========================================
    ESTILOS DO FORMULÁRIO
    ========================================= */
-
 .form-layout-section {
     padding: 60px 0;
     background-color: var(--bg-color);
 }
-
-/* Título Principal */
 .form-main-title {
     color: #F6EFEF;
     font-size: 32px;
     font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     margin-bottom: 40px;
-    word-wrap: break-word;
 }
-
-/* Grid */
 .forms-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
 }
-
-.form-column-left,
-.form-column-right {
+.form-column-left, .form-column-right {
     flex: 1;
     min-width: 300px;
-    max-width: 600px; 
 }
-
-/* Subtítulo */
 .form-subtitle {
     color: #F6EFEF;
     font-size: 24px;
     font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     margin-bottom: 30px;
-    word-wrap: break-word;
 }
-
-/* --- Inputs e Labels --- */
-
 .input-group {
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-
 .input-label-text {
     align-self: stretch;
     color: #F6EFEF;
@@ -197,9 +312,7 @@ body {
     font-family: 'DM Sans', sans-serif;
     font-weight: 600;
     margin-bottom: 8px;
-    word-wrap: break-word;
 }
-
 .styled-input {
     width: 100%;
     max-width: 586px; 
@@ -208,25 +321,16 @@ body {
     border-radius: 8px;
     border: none;
     padding: 0 12px;
-    
     color: #000;
     font-family: 'DM Sans', sans-serif;
     font-size: 16px;
 }
-
 .styled-input::placeholder {
     color: #575757;
-    font-size: 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
-    opacity: 1;
 }
-
 .styled-input:focus {
     outline: 2px solid var(--primary-green);
 }
-
-/* Input de Arquivo (Foto) */
 .file-input-styled {
     position: relative;
     display: flex;
@@ -234,88 +338,41 @@ body {
     cursor: pointer;
     overflow: hidden;
 }
-
-.file-placeholder-text {
-    color: #575757;
-    font-size: 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
-    pointer-events: none;
-}
-
 .hidden-file-input {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0; cursor: pointer;
 }
-
-/* --- Textos de Erro (Vermelho) --- */
-.password-requirements-list {
-    margin-bottom: 20px;
-}
-
 .error-text-red {
-    align-self: stretch;
     color: #FF0000;
     font-size: 16px;
     font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
     margin-bottom: 5px;
-    word-wrap: break-word;
 }
-
-/* --- Checkbox Customizado (Não se aplica) --- */
 .checkbox-wrapper-styled {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
     cursor: pointer;
-    user-select: none; /* Impede seleção de texto ao clicar */
 }
-
-/* Input invisível para acessibilidade e estado */
 .hidden-checkbox-input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+    position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;
 }
-
 .checkbox-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-color); /* Cor padrão do SVG */
-    transition: color 0.3s;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-color);
 }
-
-/* Estado Marcado (Checked) */
 .hidden-checkbox-input:checked + .checkbox-icon {
-    color: var(--primary-green); /* Muda a cor do ícone quando marcado */
+    color: var(--primary-green);
 }
-
-/* Opcional: Efeito de preenchimento ao marcar */
 .hidden-checkbox-input:checked + .checkbox-icon svg {
     fill: var(--primary-green);
-}
-
-.checkbox-label-text {
-    color: #F6EFEF;
-    font-size: 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
 }
 
 /* =========================================
    FOOTER
    ========================================= */
-
 .main-footer {
     position: relative;
     padding: 80px 0;
@@ -325,125 +382,69 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-
 .footer-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
     z-index: 1;
 }
-
 .footer-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; 
-    flex-wrap: wrap;
-    gap: 40px;
+    position: relative; z-index: 2;
+    display: flex; justify-content: space-between;
+    align-items: flex-start; flex-wrap: wrap; gap: 40px;
 }
-
-.footer-left {
-    flex: 0 0 auto;
-}
-
 .footer-logo-big {
-    width: 280px;
-    height: auto;
-    display: block;
-    margin-top: 80px; 
+    width: 280px; height: auto; display: block; margin-top: 80px; 
 }
-
 .footer-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    max-width: 800px;
+    flex: 1; display: flex; flex-direction: column; gap: 30px; max-width: 800px;
 }
-
 .footer-headline {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--text-color);
+    font-size: 20px; font-weight: 600; line-height: 1.4;
 }
-
 .footer-actions {
-    display: flex;
-    gap: 50px; 
-    flex-wrap: wrap;
-    margin-left: 50px; 
+    display: flex; gap: 50px; flex-wrap: wrap; margin-left: 50px; 
 }
-
 .btn-footer {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    height: 50px;
-    background-color: var(--primary-green);
-    color: #292929;
-    font-family: var(--font-main);
-    font-size: 20px;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 8px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30);
-    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex; justify-content: center; align-items: center;
+    width: 180px; height: 50px; background-color: var(--primary-green);
+    color: #292929; font-family: var(--font-main); font-size: 20px;
+    font-weight: 600; text-decoration: none; border-radius: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30); transition: transform 0.2s;
 }
-
 .btn-footer:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.40);
-    filter: brightness(1.1);
+    transform: translateY(-3px); filter: brightness(1.1);
 }
-
 .footer-legal-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px 30px;
-    align-items: center;
+    display: flex; flex-wrap: wrap; gap: 20px 30px;
 }
-
 .footer-legal-links a {
-    color: var(--text-color);
-    font-size: 16px;
-    font-weight: 400;
-    text-decoration: none;
-    opacity: 0.9;
-    transition: opacity 0.2s;
+    color: var(--text-color); font-size: 16px; text-decoration: none; opacity: 0.9;
 }
+.footer-legal-links a:hover { text-decoration: underline; opacity: 1; }
+.footer-copyright { font-size: 16px; opacity: 0.7; margin-top: 10px; }
 
-.footer-legal-links a:hover {
-    opacity: 1;
-    text-decoration: underline;
-}
-
-.footer-copyright {
-    font-size: 16px;
-    opacity: 0.7;
-    margin-top: 10px;
-}
-
+/* Responsividade */
 @media (max-width: 900px) {
-    .footer-content {
-        flex-direction: column;
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
-    .footer-logo-big {
-        width: 200px;
-        margin-bottom: 20px;
-        margin-top: 0;
+    .hero-text {
+        padding-right: 0; margin-bottom: 40px;
     }
-    .footer-right {
-        width: 100%;
+    .hero-image {
+        order: -1; margin-bottom: 20px;
     }
-    .footer-actions {
-        margin-left: 0;
-        gap: 20px;
-        justify-content: center;
+    .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-content { flex-direction: column; }
+    .footer-logo-big { width: 200px; margin-top: 0; margin-bottom: 20px; }
+    .footer-actions { margin-left: 0; justify-content: center; }
+}
+@media (max-width: 600px) {
+    .games-grid {
+        grid-template-columns: 1fr;
     }
 }
