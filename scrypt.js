@@ -198,17 +198,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok) {
-                    alert("Usuário cadastrado com sucesso!");
-                    
-                    // Mostra o JSON na tela conforme Questão 1
-                    console.log("JSON Retornado:", result.usuario);
-                    
-                    if(confirm("Cadastro realizado! Deseja ver a lista de usuários?")) {
-                        window.location.href = 'listagem.html';
-                    } else {
-                        form.reset();
-                    }
-                } else {
+    alert("Usuário cadastrado com sucesso!");
+
+    // REQUISITO DA QUESTÃO 1: Limpar a página visual e exibir o JSON
+    const mainContent = document.getElementById('main-content'); // Certifique-se que seu <main> tem id="main-content"
+    
+    // Formata o JSON para HTML bonito
+    const jsonOutput = JSON.stringify(result.usuario, null, 4);
+    
+    mainContent.innerHTML = `
+        <section class="container" style="padding: 100px 20px; text-align: center;">
+            <h2 style="font-size: 32px; color: var(--primary-green); margin-bottom: 20px;">Dados Submetidos com Sucesso!</h2>
+            <div style="background: #111; padding: 20px; border-radius: 8px; text-align: left; display: inline-block; max-width: 100%; overflow-x: auto;">
+                <pre style="color: #0f0; font-family: monospace;">${jsonOutput}</pre>
+            </div>
+            <br><br>
+            <a href="listagem.html" class="btn-signup" style="display: inline-block;">Ver Listagem</a>
+            <a href="cadastro.html" class="btn-primary" style="margin-left: 20px;">Novo Cadastro</a>
+        </section>
+    `;
+    
+    // Rola a página para o topo para o usuário ver
+    window.scrollTo(0, 0);
+} else {
                     // Exibe erro vindo do servidor (ex: SQL Injection ou Validação Falhou)
                     alert("Erro do Servidor: " + result.error);
                 }
