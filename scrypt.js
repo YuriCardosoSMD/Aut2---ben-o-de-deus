@@ -2,18 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- LÓGICA DA LISTAGEM DE USUÁRIOS (Questão 4) ---
     const usersGrid = document.querySelector('.users-grid');
-    // Verifica se estamos na página de listagem
     if (usersGrid) {
-        carregarUsuarios(1); // Carrega a primeira página ao iniciar
+        carregarUsuarios(1);
     }
 
     async function carregarUsuarios(pagina) {
         try {
             const container = document.querySelector('.users-grid');
-            // Substitui o grid visual por uma tabela ou loading
             container.innerHTML = '<p style="color:white; text-align:center;">Carregando dados...</p>';
-            
-            // Estilo temporário para transformar o grid em container de tabela
             container.style.display = 'block'; 
 
             const res = await fetch(`http://localhost:3000/listar_usurios?page=${pagina}`);
@@ -24,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Monta a Tabela HTML
+            // Tabela HTML
             let html = `
                 <div style="overflow-x:auto;">
                     <table style="width: 100%; border-collapse: collapse; color: #fff; background: #1e1e1e; border-radius: 8px; overflow: hidden;">
@@ -54,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             html += `</tbody></table></div>`;
 
-            // Controles de Paginação
+            // Paginação
             html += `
                 <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
                     <button id="btnPrev" style="padding: 8px 16px; cursor: pointer; background: #4AAD4A; border: none; color: white; border-radius: 4px;" ${data.paginaAtual === 1 ? 'disabled style="opacity:0.5"' : ''}>Anterior</button>
@@ -65,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             container.innerHTML = html;
 
-            // Eventos dos botões de paginação
             const btnPrev = document.getElementById('btnPrev');
             const btnNext = document.getElementById('btnNext');
 
@@ -83,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- LÓGICA DO FORMULÁRIO (Questão 1, 2 e 4 - Upload) ---
+    // --- LÓGICA DO FORMULÁRIO (Questão 1, 2 e 3) ---
     const form = document.getElementById('cadastroForm');
     const cepInput = document.getElementById('cep');
     const btnLimpar = document.getElementById('btnLimpar');
@@ -92,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (form) {
         
-        // Integração API de CEP
+        // Máscara e Integração API de CEP
         cepInput.addEventListener('input', (e) => {
             let val = e.target.value.replace(/\D/g, ''); 
             if (val.length > 8) val = val.slice(0, 8);
@@ -123,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Lógica do Checkbox "Sem Número"
         if(chkSemNumero) {
             chkSemNumero.addEventListener('change', (e) => {
                 if(e.target.checked) {
@@ -135,49 +131,86 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Botão Limpar
         btnLimpar.addEventListener('click', () => {
             if(confirm("Deseja limpar todos os campos?")) form.reset();
         });
 
-        // --- SUBMIT DO FORMULÁRIO (COM UPLOAD) ---
+        // --- SUBMIT DO FORMULÁRIO ---
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const formData = new FormData(form);
 
-            // Validações básicas (simplificadas para focar no envio)
-            const formData = new FormData(form); // Captura campos de texto e arquivos automaticamente
-
-            // Validação de Senha (igual a original)
+            // --- VALIDAÇÕES DA QUESTÃO 1 ---
+            const nome = formData.get('nome');
+            const email = formData.get('email');
+            const rua = formData.get('rua');
+            const cidade = formData.get('cidade');
+            const estado = formData.get('estado');
             const senha = formData.get('senha');
             const senhaConfirm = formData.get('senha_confirm');
-            
+
+            // 1. Nome
+            if (!nome || nome.length < 2 || nome.length > 50) {
+                alert("O nome deve ter entre 2 e 50 caracteres.");
+                return;
+            }
+
+            // 2. E-mail (Regex rigoroso: ccc@ddd.ccc)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\.]+$/;
+            if (!emailRegex.test(email)) {
+                alert("E-mail inválido! Formato esperado: exemplo@dominio.com");
+                return;
+            }
+
+            // 3. Endereço e Cidade
+            if (rua.length < 4) { alert("O endereço (Rua) deve ter no mínimo 4 caracteres."); return; }
+            if (cidade.length < 3) { alert("A cidade deve ter no mínimo 3 caracteres."); return; }
+            if (estado.length !== 2) { alert("O estado deve ter exatamente 2 caracteres (Sigla)."); return; }
+
+            // 4. Senha e Validação
+            if (senha.length < 10) {
+                alert("A senha deve ter no mínimo 10 caracteres.");
+                return;
+            }
             if (senha !== senhaConfirm) {
                 alert("As senhas não conferem!");
                 return;
             }
-            if (senha.length < 10) {
-                alert("Senha deve ter no mínimo 10 caracteres.");
+
+            // Regra de complexidade (Letras + Números + Especiais específicos)
+            const temLetra = /[a-zA-Z]/.test(senha);
+            const temNumero = /[0-9]/.test(senha);
+            const temEspecial = /[*;#]/.test(senha);
+
+            if (!temLetra || !temNumero || !temEspecial) {
+                alert("A senha deve conter Letras, Números e pelo menos um caractere especial (*, ; ou #).");
                 return;
             }
 
+            // Envio para o Backend
             try {
-                // Envia para o backend (Endpoint criado no server.js)
-                const response = await fetch('http://localhost:3000/cadastro', {
+                const response = await fetch('http://localhost:3000/cadastrar_usuario', {
                     method: 'POST',
-                    body: formData // Não precisa de headers, o browser define o boundary do multipart
+                    body: formData
                 });
 
+                const result = await response.json();
+
                 if (response.ok) {
-                    const result = await response.json();
                     alert("Usuário cadastrado com sucesso!");
                     
-                    // Redireciona para a listagem ou limpa
-                    if(confirm("Deseja ver a lista de usuários agora?")) {
+                    // Mostra o JSON na tela conforme Questão 1
+                    console.log("JSON Retornado:", result.usuario);
+                    
+                    if(confirm("Cadastro realizado! Deseja ver a lista de usuários?")) {
                         window.location.href = 'listagem.html';
                     } else {
                         form.reset();
                     }
                 } else {
-                    alert("Erro ao cadastrar no servidor.");
+                    // Exibe erro vindo do servidor (ex: SQL Injection ou Validação Falhou)
+                    alert("Erro do Servidor: " + result.error);
                 }
             } catch (error) {
                 console.error("Erro de envio:", error);
