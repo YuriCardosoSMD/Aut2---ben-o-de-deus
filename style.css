@@ -162,7 +162,7 @@ img {
     position: relative;
     padding: 80px 0;
     overflow: hidden; 
-    background-image: url('assets/background-sobre.jpg'); /* Atualizado */
+    background-image: url('assets/fundo.jpeg'); /* Atualizado */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -177,7 +177,7 @@ img {
     z-index: 1;
     
     /* Gradiente Roxo/Verde com Opacidade */
-    opacity: 0.60;
+    opacity: 0.75;
     background: linear-gradient(180deg, rgba(198, 125, 255, 0.31) 0%, rgba(76, 175, 81, 0.27) 47%, rgba(41, 41, 41, 0.35) 98%);
 }
 
@@ -506,7 +506,7 @@ img {
     position: relative;
     padding: 80px 0;
     color: var(--text-color);
-    background-image: url('assets/background-sobre.jpg'); /* Fundo igual ao Sobre */
+    background-image: url('assets/fundo.jpeg'); /* Fundo igual ao Sobre */
     background-size: cover;
     background-position: center;
 }
