@@ -1,11 +1,11 @@
 :root {
     /* Cores do Design */
-    --bg-color: #252525;
+    --bg-color: #151515;
     --card-bg: #1e1e1e;
     --text-color: #F6EFEF;
     --primary-green: #4AAD4A;
     --accent-purple: #9D65C9;
-    --error-red: #FF4444; /* Nova variável para erro */
+    --error-red: #FF6666; /* Nova variável para erro */
     
     /* Fontes */
     --font-main: 'DM Sans', sans-serif;
@@ -96,7 +96,7 @@ img {
 }
 
 .logo {
-    width: 150px;
+    width: 200px;
 }
 
 .company-name {
