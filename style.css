@@ -5,7 +5,7 @@
     --text-color: #F6EFEF;
     --primary-green: #4AAD4A;
     --accent-purple: #9D65C9;
-    --error-red: #FF6666; /* Nova variável para erro */
+    --error-red: #FF6666;
     
     /* Fontes */
     --font-main: 'DM Sans', sans-serif;
@@ -26,7 +26,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Garante que imagens nunca estourem a tela */
+/* --- Globais e Utilitários --- */
 img {
     max-width: 100%;
     height: auto;
@@ -38,7 +38,28 @@ img {
     padding: 0 20px;
 }
 
-/* --- Botão de Retornar (Link com seta) --- */
+/* Botões Padrão */
+.btn-primary {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-green);
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Botão de Retornar */
 .btn-back-home {
     position: absolute;
     top: 130px;
@@ -63,7 +84,6 @@ img {
     width: auto;
 }
 
-/* Ajuste do botão voltar para celulares */
 @media (max-width: 768px) {
     .btn-back-home {
         position: relative;
@@ -96,7 +116,7 @@ img {
 }
 
 .logo {
-    width: 200px;
+    width: 250px; /* Aumentado conforme solicitado */
 }
 
 .company-name {
@@ -105,7 +125,6 @@ img {
     display: none; 
 }
 
-/* Botão "Cadastre-se" */
 .btn-signup {
     display: inline-flex;
     justify-content: center;
@@ -126,7 +145,6 @@ img {
     box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
 }
 
-/* Responsividade Header */
 @media (max-width: 480px) {
     .header-content {
         flex-direction: column;
@@ -137,12 +155,14 @@ img {
     }
 }
 
-/* --- Hero Section Geral --- */
+/* --- Hero Sections --- */
+
+/* Hero Home (Geral) */
 .hero-section {
     position: relative;
     padding: 80px 0;
     overflow: hidden; 
-    background-image: url('assets/background-sobre.jpg');
+    background-image: url('assets/background-sobre.jpg'); /* Atualizado */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -154,8 +174,11 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1;
+    
+    /* Gradiente Roxo/Verde com Opacidade */
+    opacity: 0.60;
+    background: linear-gradient(180deg, rgba(198, 125, 255, 0.31) 0%, rgba(76, 175, 81, 0.27) 47%, rgba(41, 41, 41, 0.35) 98%);
 }
 
 .hero-grid {
@@ -183,7 +206,6 @@ img {
     margin-bottom: 30px;
 }
 
-/* Responsividade Hero Home */
 @media (max-width: 900px) {
     .hero-grid {
         grid-template-columns: 1fr;
@@ -198,27 +220,7 @@ img {
     .hero-text h2 { font-size: 2.5rem; }
 }
 
-.btn-primary {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--primary-green);
-    color: #fff;
-    padding: 12px 30px;
-    font-size: 18px;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
-    filter: brightness(1.1);
-}
-
-/* --- Hero Section (Cadastro e Listagem) --- */
+/* Hero Cadastro e Listagem */
 .cadastro-hero {
     position: relative;
     width: 100%;
@@ -226,7 +228,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('assets/background-sobre.jpg');
+    background-image: url('assets/fundo.jpeg');
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -248,12 +250,14 @@ img {
     max-width: 1210px;
     word-wrap: break-word;
 }
+
 .hero-subtitle {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 20px;
     max-width: 1100px;
 }
+
 .hero-link-policy {
     font-family: var(--font-sec);
     font-size: 16px;
@@ -309,157 +313,20 @@ img {
     text-align: center;
 }
 
-/* --- Seção de Jogos (Home) --- */
+/* --- Seção de Jogos --- */
 .games-section {
     padding: 60px 0;
     text-align: center;
 }
+
 .section-title {
     font-size: 32px;
     margin-bottom: 40px;
 }
 
-/* Estilos antigos (mantidos para compatibilidade, se necessário) */
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-.game-card {
-    position: relative;
-    aspect-ratio: 3 / 4; 
-    border-radius: 8px;
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: hard-light;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-}
-
-/* --- Formulários --- */
-.form-layout-section {
-    padding: 60px 0;
-    background-color: var(--bg-color);
-}
-.form-main-title {
-    font-size: 32px;
-    margin-bottom: 40px;
-    text-align: center;
-}
-.forms-grid {
-    display: flex;
-    gap: 40px;
-    justify-content: space-between;
-}
-.form-column-left, .form-column-right { flex: 1; }
-
-@media (max-width: 768px) {
-    .forms-grid { flex-direction: column; gap: 60px; }
-}
-
-.input-group { margin-bottom: 25px; display: flex; flex-direction: column; }
-.input-label-text { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
-.styled-input {
-    width: 100%; height: 43px; background: #C3C3C3;
-    border-radius: 8px; border: none; padding: 0 12px;
-    font-size: 16px; color: #000;
-    transition: border 0.2s ease; /* Transição para o erro */
-}
-.styled-input:focus { outline: 2px solid var(--primary-green); }
-
-/* --- NOVO: ESTILO PARA ERRO DE VALIDAÇÃO --- */
-.input-error {
-    border: 2px solid var(--error-red) !important;
-    background-color: #e6c8c8 !important; /* Fundo levemente avermelhado para contraste */
-}
-
-/* Altera a cor do placeholder para vermelho quando estiver com erro */
-.input-error::placeholder {
-    color: var(--error-red) !important;
-    opacity: 1; /* Garante visibilidade no Firefox */
-    font-weight: 700;
-}
-
-/* Compatibilidade com navegadores */
-.input-error::-webkit-input-placeholder {
-    color: var(--error-red);
-    font-weight: 700;
-}
-.input-error::-moz-placeholder {
-    color: var(--error-red);
-    font-weight: 700;
-    opacity: 1;
-}
-
-.checkbox-wrapper-styled {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 20px; cursor: pointer;
-}
-.hidden-checkbox-input { display: none; }
-.checkbox-icon {
-    display: flex; align-items: center; justify-content: center; color: var(--text-color);
-}
-.hidden-checkbox-input:checked + .checkbox-icon { color: var(--primary-green); }
-.hidden-checkbox-input:checked + .checkbox-icon svg { fill: var(--primary-green); }
-
-.form-footer-actions {
-    margin-top: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;
-}
-.btn-action-container { display: flex; gap: 30px; }
-
-@media (max-width: 480px) {
-    .btn-action-container { flex-direction: column; width: 100%; }
-    .btn-action-container button { width: 100%; }
-    .BotO { width: 100% !important; }
-}
-
-.BotO {
-    width: 180px; height: 50px; background: var(--primary-green);
-    border-radius: 8px; display: flex; justify-content: center; align-items: center;
-    font-size: 20px; font-weight: 600; color: #292929; box-shadow: 0px 4px 4px rgba(0,0,0,0.3);
-}
-
-/* --- Footer --- */
-.main-footer {
-    position: relative; padding: 80px 0; color: var(--text-color);
-    background-image: url('assets/background-sobre.jpg');
-    background-size: cover; background-position: center;
-}
-.footer-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); z-index: 1;
-}
-.footer-content {
-    position: relative; z-index: 2; display: flex; justify-content: space-between;
-    flex-wrap: wrap; gap: 40px;
-}
-.footer-logo-big { width: 280px; margin-top: 80px; }
-.footer-right { flex: 1; display: flex; flex-direction: column; gap: 30px; max-width: 800px; }
-.footer-actions { display: flex; gap: 50px; flex-wrap: wrap; margin-left: 50px; }
-
-@media (max-width: 900px) {
-    .footer-content { flex-direction: column; align-items: center; text-align: center; }
-    .footer-logo-big { margin-top: 0; width: 200px; }
-    .footer-actions { margin-left: 0; justify-content: center; gap: 20px; }
-}
-
-.btn-footer {
-    display: inline-flex; justify-content: center; align-items: center;
-    width: 180px; height: 50px; background-color: var(--primary-green);
-    color: #292929; font-weight: 600; text-decoration: none; border-radius: 8px;
-}
-.footer-legal-links { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.footer-legal-links a { color: var(--text-color); text-decoration: none; }
-.error-text-red { color: #FF0000; font-size: 14px; margin-bottom: 5px; }
-
-
-/* --- NOVO ESTILO: GAMES GRID LARGE (ADICIONADO) --- */
+/* Grid de Jogos (Versão Principal/Large) */
 .games-grid-large {
     display: grid;
-    /* Cards maiores (min 220px) e responsivos */
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 40px;
     width: 100%;
@@ -474,39 +341,31 @@ img {
     gap: 15px;
     text-align: center;
     transition: transform 0.2s ease;
-    
-    /* ADICIONE ESTA LINHA: Remove sublinhado de link */
     text-decoration: none; 
 }
 
-/* O card sobe levemente ao passar o mouse */
 .game-card-large:hover {
     transform: translateY(-5px);
 }
 
 .game-cover {
     width: 100%;
-    /* Formato Retangular Vertical (Capa de Jogo) */
     aspect-ratio: 2 / 3; 
     background-color: #333;
     border-radius: 12px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
     border: 3px solid transparent; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover na capa: borda verde brilhante */
 .game-card-large:hover .game-cover {
     border-color: var(--primary-green);
     box-shadow: 0 10px 25px rgba(74, 173, 74, 0.3);
@@ -532,11 +391,197 @@ img {
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
-    /* Se tiver imagem, o texto some (workaround visual simples) */
     text-shadow: 0 0 4px rgba(0,0,0,0.8);
-    opacity: 0; /* Esconde se tiver imagem carregada por cima */
+    opacity: 0;
 }
-/* Mostra placeholder se não tiver imagem (depende do html) - Opcional */
+
 .game-cover:not([style*="http"]) .img-placeholder {
     opacity: 1;
+}
+
+/* Legacy Games Grid (Compatibilidade) */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.game-card {
+    position: relative;
+    aspect-ratio: 3 / 4; 
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: hard-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+/* --- Formulários --- */
+.form-layout-section {
+    padding: 60px 0;
+    background-color: var(--bg-color);
+}
+
+.form-main-title {
+    font-size: 32px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.forms-grid {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+}
+
+.form-column-left, .form-column-right { flex: 1; }
+
+.input-group { margin-bottom: 25px; display: flex; flex-direction: column; }
+.input-label-text { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+
+.styled-input {
+    width: 100%; height: 43px; background: #C3C3C3;
+    border-radius: 8px; border: none; padding: 0 12px;
+    font-size: 16px; color: #000;
+    transition: border 0.2s ease;
+}
+
+.styled-input:focus { outline: 2px solid var(--primary-green); }
+
+/* Erro de Validação */
+.input-error {
+    border: 2px solid var(--error-red) !important;
+    background-color: #e6c8c8 !important;
+}
+
+.input-error::placeholder {
+    color: var(--error-red) !important;
+    opacity: 1;
+    font-weight: 700;
+}
+
+.input-error::-webkit-input-placeholder {
+    color: var(--error-red);
+    font-weight: 700;
+}
+
+.checkbox-wrapper-styled {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px; cursor: pointer;
+}
+
+.hidden-checkbox-input { display: none; }
+
+.checkbox-icon {
+    display: flex; align-items: center; justify-content: center; color: var(--text-color);
+}
+
+.hidden-checkbox-input:checked + .checkbox-icon { color: var(--primary-green); }
+.hidden-checkbox-input:checked + .checkbox-icon svg { fill: var(--primary-green); }
+
+.btn-action-container { display: flex; gap: 30px; }
+
+.BotO {
+    width: 180px; height: 50px; background: var(--primary-green);
+    border-radius: 8px; display: flex; justify-content: center; align-items: center;
+    font-size: 20px; font-weight: 600; color: #292929; box-shadow: 0px 4px 4px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+    .forms-grid { flex-direction: column; gap: 60px; }
+}
+
+@media (max-width: 480px) {
+    .btn-action-container { flex-direction: column; width: 100%; }
+    .btn-action-container button { width: 100%; }
+    .BotO { width: 100% !important; }
+}
+
+/* --- Footer --- */
+.main-footer {
+    position: relative;
+    padding: 80px 0;
+    color: var(--text-color);
+    background-image: url('assets/background-sobre.jpg'); /* Fundo igual ao Sobre */
+    background-size: cover;
+    background-position: center;
+}
+
+.footer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    
+    /* Mesmo gradiente do Hero */
+    opacity: 0.60;
+    background: linear-gradient(180deg, rgba(198, 125, 255, 0.31) 0%, rgba(76, 175, 81, 0.27) 47%, rgba(41, 41, 41, 0.35) 98%);
+}
+
+.footer-content {
+    position: relative; 
+    z-index: 2; 
+    display: flex; 
+    justify-content: space-between;
+    flex-wrap: wrap; 
+    gap: 40px;
+}
+
+.footer-logo-big {
+    width: 100%;       /* Ocupa a largura disponível da coluna */
+    max-width: 500px;  /* Limita tamanho máximo */
+    margin-top: 60px;  /* Espaço superior aumentado */
+    height: auto;
+}
+
+.footer-right { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 30px; 
+    max-width: 800px; 
+}
+
+.footer-headline {
+    font-size: 1.25rem; /* Texto do mesmo tamanho do body */
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.footer-actions { 
+    display: flex; 
+    gap: 50px; 
+    flex-wrap: wrap; 
+    margin-left: 150px; 
+}
+
+.btn-footer {
+    display: inline-flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 180px; 
+    height: 50px; 
+    background-color: var(--primary-green);
+    color: #292929; 
+    font-weight: 600; 
+    text-decoration: none; 
+    border-radius: 8px;
+}
+
+.footer-legal-links { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+}
+
+.footer-legal-links a { 
+    color: var(--text-color); 
+    text-decoration: none; 
 }
