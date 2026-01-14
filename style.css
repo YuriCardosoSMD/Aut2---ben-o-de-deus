@@ -473,8 +473,10 @@ img {
     align-items: center;
     gap: 15px;
     text-align: center;
-    /* Animação suave no conjunto */
     transition: transform 0.2s ease;
+    
+    /* ADICIONE ESTA LINHA: Remove sublinhado de link */
+    text-decoration: none; 
 }
 
 /* O card sobe levemente ao passar o mouse */
