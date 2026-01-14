@@ -18,18 +18,18 @@
     <header class="main-header">
         <div class="container header-content">
             <div class="logo-container">
-    <a href="home.html">
-        <img src="assets/logo.png" alt="Mandacaru Games Logo" class="logo">
-    </a>
-    <h1 class="company-name">Mandacaru Games</h1>
-</div>
+                <a href="home.html">
+                    <img src="assets/logo.png" alt="Mandacaru Games Logo" class="logo">
+                </a>
+                <h1 class="company-name">Mandacaru Games</h1>
+            </div>
             <nav class="main-nav">
                 <a href="cadastro.html" class="btn-signup">Cadastre-se</a>
             </nav>
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="cadastro-hero">
             <div class="hero-overlay"></div>
             <div class="container hero-content-centered">
@@ -52,38 +52,37 @@
                     Formulário de Preenchimento
                 </div>
 
-                <div class="forms-grid">
-                    <div class="form-column-left">
-                        <h3 class="input-label-text" style="font-size: 24px; font-weight: 400; margin-bottom: 30px;">Informações Pessoais</h3>
-                        
-                        <form id="personalInfoForm" class="styled-form">
+                <form id="cadastroForm" class="styled-form" autocomplete="off">
+                    <div class="forms-grid">
+                        <div class="form-column-left">
+                            <h3 class="input-label-text" style="font-size: 24px; font-weight: 400; margin-bottom: 30px; text-align: center;">Informações Pessoais</h3>
+                            
                             <div class="input-group">
                                 <label for="nome" class="input-label-text">Nome Completo</label>
-                                <input type="text" id="nome" class="styled-input" placeholder="Digite seu nome completo">
+                                <input type="text" id="nome" name="nome" class="styled-input" placeholder="Digite seu nome completo (Máx 50 caracteres)" maxlength="50">
                             </div>
 
                             <div class="input-group">
                                 <label for="email" class="input-label-text">E-mail</label>
-                                <input type="email" id="email" class="styled-input" placeholder="exemplo@dominio.com">
+                                <input type="email" id="email" name="email" class="styled-input" placeholder="exemplo@dominio.com">
                             </div>
 
                             <div class="input-group">
                                 <label for="foto" class="input-label-text">Foto</label>
                                 <div class="styled-input" style="display: flex; align-items: center; position: relative;">
                                     <span style="color: #575757;">Adicione uma foto até 5MB</span>
-                                    <input type="file" id="foto" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;">
+                                    <input type="file" id="foto" name="foto" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;">
                                 </div>
                             </div>
 
                             <div class="input-group">
                                 <label for="senha" class="input-label-text">Crie sua senha</label>
-                                <input type="password" id="senha" class="styled-input" placeholder="Crie uma senha forte">
+                                <input type="password" id="senha" name="senha" class="styled-input" placeholder="Crie uma senha forte">
                             </div>
 
                             <div class="password-requirements-list" style="margin-bottom: 20px;">
                                 <div class="error-text-red">A senha deve possuir 10 caracteres.</div>
-                                <div class="error-text-red">A senha deve possuir letras maiúsculas.</div>
-                                <div class="error-text-red">A senha deve possuir números.</div>
+                                <div class="error-text-red">A senha deve possuir letras e números.</div>
                                 <div class="error-text-red">
                                     A senha deve possuir caracteres especiais (*, ;, #).
                                 </div>
@@ -91,28 +90,26 @@
 
                             <div class="input-group">
                                 <label for="senha-confirm" class="input-label-text">Repita sua senha</label>
-                                <input type="password" id="senha-confirm" class="styled-input" placeholder="Digite a senha criada anteriormente">
+                                <input type="password" id="senha-confirm" name="senha_confirm" class="styled-input" placeholder="Digite a senha criada anteriormente">
                             </div>
-                        </form>
-                    </div>
+                        </div>
 
-                    <div class="form-column-right">
-                        <h3 class="input-label-text" style="font-size: 24px; font-weight: 400; margin-bottom: 30px; text-align: center;">Endereço</h3>
+                        <div class="form-column-right">
+                            <h3 class="input-label-text" style="font-size: 24px; font-weight: 400; margin-bottom: 30px; text-align: center;">Endereço</h3>
 
-                        <form id="addressForm" class="styled-form">
                             <div class="input-group">
                                 <label for="cep" class="input-label-text">CEP</label>
-                                <input type="text" id="cep" class="styled-input" placeholder="00000-000">
+                                <input type="text" id="cep" name="cep" class="styled-input" placeholder="00000-000" maxlength="9">
                             </div>
 
                             <div class="input-group">
                                 <label for="rua" class="input-label-text">Rua</label>
-                                <input type="text" id="rua" class="styled-input" placeholder="Digite sua rua">
+                                <input type="text" id="rua" name="rua" class="styled-input" placeholder="Digite sua rua">
                             </div>
 
                             <div class="input-group">
                                 <label for="numero" class="input-label-text">Número</label>
-                                <input type="text" id="numero" class="styled-input" placeholder="Número">
+                                <input type="text" id="numero" name="numero" class="styled-input" placeholder="Número">
                             </div>
 
                             <label class="checkbox-wrapper-styled">
@@ -127,37 +124,42 @@
 
                             <div class="input-group">
                                 <label for="bairro" class="input-label-text">Bairro</label>
-                                <input type="text" id="bairro" class="styled-input" placeholder="Seu bairro">
+                                <input type="text" id="bairro" name="bairro" class="styled-input" placeholder="Seu bairro">
                             </div>
 
                             <div class="input-group">
                                 <label for="cidade" class="input-label-text">Cidade</label>
-                                <input type="text" id="cidade" class="styled-input" placeholder="Sua cidade">
+                                <input type="text" id="cidade" name="cidade" class="styled-input" placeholder="Sua cidade">
                             </div>
-                        </form>
-                    </div>
-                </div>
 
-                <div class="form-footer-actions">
-                    <p>Você autoriza a utilização de seu nome e foto para integrar nossos membros no site?</p>
-                    <div style="display: flex; gap: 30px; margin-bottom: 20px;">
-                        <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                            <input type="radio" name="autoriza" value="sim" style="accent-color: var(--primary-green);"> Sim
-                        </label>
-                        <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                            <input type="radio" name="autoriza" value="nao" style="accent-color: var(--primary-green);"> Não
-                        </label>
+                            <div class="input-group">
+                                <label for="estado" class="input-label-text">Estado (UF)</label>
+                                <input type="text" id="estado" name="estado" class="styled-input" placeholder="UF" maxlength="2" style="text-transform: uppercase;">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="btn-action-container">
-                        <button type="button" id="btnLimpar" style="background: none; border: none; padding: 0; cursor: pointer;">
-                            <div class="BotO">Limpar</div>
-                        </button>
-                        <button type="submit" id="btnEnviar" form="personalInfoForm" style="background: none; border: none; padding: 0; cursor: pointer;">
-                            <div class="BotO">Enviar</div>
-                        </button>
+                    <div class="form-footer-actions">
+                        <p>Você autoriza a utilização de seu nome e foto para integrar nossos membros no site?</p>
+                        <div style="display: flex; gap: 30px; margin-bottom: 20px;">
+                            <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                <input type="radio" name="autoriza" value="sim" checked style="accent-color: var(--primary-green);"> Sim
+                            </label>
+                            <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                <input type="radio" name="autoriza" value="nao" style="accent-color: var(--primary-green);"> Não
+                            </label>
+                        </div>
+
+                        <div class="btn-action-container">
+                            <button type="button" id="btnLimpar" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <div class="BotO">Limpar</div>
+                            </button>
+                            <button type="submit" id="btnEnviar" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <div class="BotO">Enviar</div>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
 
             </div>
         </section>

@@ -5,6 +5,7 @@
     --text-color: #F6EFEF;
     --primary-green: #4AAD4A;
     --accent-purple: #9D65C9;
+    --error-red: #FF4444; /* Nova variável para erro */
     
     /* Fontes */
     --font-main: 'DM Sans', sans-serif;
@@ -65,10 +66,10 @@ img {
 /* Ajuste do botão voltar para celulares */
 @media (max-width: 768px) {
     .btn-back-home {
-        position: relative; /* Deixa de flutuar solto */
+        position: relative;
         top: auto;
         left: auto;
-        margin: 20px 20px 0 20px; /* Margem simples */
+        margin: 20px 20px 0 20px;
     }
 }
 
@@ -189,7 +190,7 @@ img {
         text-align: center;
     }
     .hero-image {
-        order: -1; /* Imagem vai para cima no celular */
+        order: -1;
         margin-bottom: 20px;
         display: flex;
         justify-content: center;
@@ -221,7 +222,6 @@ img {
 .cadastro-hero {
     position: relative;
     width: 100%;
-    /* min-height removido para ser flexível */
     padding: 60px 20px 100px 20px; 
     display: flex;
     align-items: center;
@@ -241,7 +241,6 @@ img {
     width: 100%;
 }
 
-/* Classes para substituir estilos inline */
 .hero-big-title {
     font-size: 72px;
     font-weight: 600;
@@ -263,25 +262,17 @@ img {
     margin-bottom: 20px;
 }
 
-/* Responsividade dos Textos Hero */
 @media (max-width: 768px) {
-    .hero-big-title {
-        font-size: 42px; /* Reduz fonte */
-    }
-    .hero-subtitle {
-        font-size: 18px;
-    }
+    .hero-big-title { font-size: 42px; }
+    .hero-subtitle { font-size: 18px; }
 }
 @media (max-width: 480px) {
-    .hero-big-title {
-        font-size: 32px;
-    }
+    .hero-big-title { font-size: 32px; }
 }
 
 /* --- Listagem de Usuários --- */
 .users-grid {
     display: grid;
-    /* Auto-fill cria colunas responsivas automaticamente */
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
     gap: 20px;
     width: 100%;
@@ -318,7 +309,7 @@ img {
     text-align: center;
 }
 
-/* --- Jogos (Home) --- */
+/* --- Seção de Jogos (Home) --- */
 .games-section {
     padding: 60px 0;
     text-align: center;
@@ -328,6 +319,7 @@ img {
     margin-bottom: 40px;
 }
 
+/* Estilos antigos (mantidos para compatibilidade, se necessário) */
 .games-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -335,14 +327,6 @@ img {
     max-width: 900px;
     margin: 0 auto;
 }
-
-@media (max-width: 900px) {
-    .games-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-    .games-grid { grid-template-columns: 1fr; } /* 1 coluna no celular */
-}
-
 .game-card {
     position: relative;
     aspect-ratio: 3 / 4; 
@@ -354,16 +338,6 @@ img {
     align-items: center;
     justify-content: center;
     transition: transform 0.2s;
-}
-.game-card:hover { transform: scale(1.03); }
-.card-green { background-color: var(--primary-green); }
-.card-purple { background-color: var(--accent-purple); }
-.game-title {
-    z-index: 2;
-    color: #1a1a1a;
-    font-weight: 700;
-    font-size: 24px;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.2);
 }
 
 /* --- Formulários --- */
@@ -381,129 +355,90 @@ img {
     gap: 40px;
     justify-content: space-between;
 }
-.form-column-left, .form-column-right {
-    flex: 1;
-}
+.form-column-left, .form-column-right { flex: 1; }
 
-/* Responsividade Formulário */
 @media (max-width: 768px) {
-    .forms-grid {
-        flex-direction: column; /* Um embaixo do outro */
-        gap: 60px;
-    }
+    .forms-grid { flex-direction: column; gap: 60px; }
 }
 
-.input-group {
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: column;
-}
-.input-label-text {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
+.input-group { margin-bottom: 25px; display: flex; flex-direction: column; }
+.input-label-text { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
 .styled-input {
-    width: 100%;
-    /* max-width: 586px removido para ocupar espaço total */
-    height: 43px;
-    background: #C3C3C3;
-    border-radius: 8px;
-    border: none;
-    padding: 0 12px;
-    font-size: 16px;
-    color: #000;
+    width: 100%; height: 43px; background: #C3C3C3;
+    border-radius: 8px; border: none; padding: 0 12px;
+    font-size: 16px; color: #000;
+    transition: border 0.2s ease; /* Transição para o erro */
 }
-.styled-input:focus {
-    outline: 2px solid var(--primary-green);
+.styled-input:focus { outline: 2px solid var(--primary-green); }
+
+/* --- NOVO: ESTILO PARA ERRO DE VALIDAÇÃO --- */
+.input-error {
+    border: 2px solid var(--error-red) !important;
+    background-color: #e6c8c8 !important; /* Fundo levemente avermelhado para contraste */
+}
+
+/* Altera a cor do placeholder para vermelho quando estiver com erro */
+.input-error::placeholder {
+    color: var(--error-red) !important;
+    opacity: 1; /* Garante visibilidade no Firefox */
+    font-weight: 700;
+}
+
+/* Compatibilidade com navegadores */
+.input-error::-webkit-input-placeholder {
+    color: var(--error-red);
+    font-weight: 700;
+}
+.input-error::-moz-placeholder {
+    color: var(--error-red);
+    font-weight: 700;
+    opacity: 1;
 }
 
 .checkbox-wrapper-styled {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    cursor: pointer;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px; cursor: pointer;
 }
-.hidden-checkbox-input { display: none; } /* Checkbox real escondido */
+.hidden-checkbox-input { display: none; }
 .checkbox-icon {
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-color);
+    display: flex; align-items: center; justify-content: center; color: var(--text-color);
 }
-.hidden-checkbox-input:checked + .checkbox-icon {
-    color: var(--primary-green);
-}
-.hidden-checkbox-input:checked + .checkbox-icon svg {
-    fill: var(--primary-green);
-}
+.hidden-checkbox-input:checked + .checkbox-icon { color: var(--primary-green); }
+.hidden-checkbox-input:checked + .checkbox-icon svg { fill: var(--primary-green); }
 
-/* Botões do Rodapé do Formulário */
 .form-footer-actions {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    text-align: center;
+    margin-top: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;
 }
-.btn-action-container {
-    display: flex;
-    gap: 30px;
-}
+.btn-action-container { display: flex; gap: 30px; }
+
 @media (max-width: 480px) {
-    .btn-action-container {
-        flex-direction: column;
-        width: 100%;
-    }
-    .btn-action-container button {
-        width: 100%;
-    }
-    .BotO {
-        width: 100% !important; /* Força largura total no mobile */
-    }
+    .btn-action-container { flex-direction: column; width: 100%; }
+    .btn-action-container button { width: 100%; }
+    .BotO { width: 100% !important; }
 }
 
 .BotO {
-    width: 180px;
-    height: 50px;
-    background: var(--primary-green);
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 600;
-    color: #292929;
-    box-shadow: 0px 4px 4px rgba(0,0,0,0.3);
+    width: 180px; height: 50px; background: var(--primary-green);
+    border-radius: 8px; display: flex; justify-content: center; align-items: center;
+    font-size: 20px; font-weight: 600; color: #292929; box-shadow: 0px 4px 4px rgba(0,0,0,0.3);
 }
 
 /* --- Footer --- */
 .main-footer {
-    position: relative;
-    padding: 80px 0;
-    color: var(--text-color);
+    position: relative; padding: 80px 0; color: var(--text-color);
     background-image: url('assets/background-sobre.jpg');
-    background-size: cover;
-    background-position: center;
+    background-size: cover; background-position: center;
 }
 .footer-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.85); z-index: 1;
 }
 .footer-content {
-    position: relative; z-index: 2;
-    display: flex; justify-content: space-between;
+    position: relative; z-index: 2; display: flex; justify-content: space-between;
     flex-wrap: wrap; gap: 40px;
 }
-.footer-logo-big {
-    width: 280px; margin-top: 80px; 
-}
-.footer-right {
-    flex: 1; display: flex; flex-direction: column; gap: 30px; max-width: 800px;
-}
-.footer-actions {
-    display: flex; gap: 50px; flex-wrap: wrap; margin-left: 50px;
-}
+.footer-logo-big { width: 280px; margin-top: 80px; }
+.footer-right { flex: 1; display: flex; flex-direction: column; gap: 30px; max-width: 800px; }
+.footer-actions { display: flex; gap: 50px; flex-wrap: wrap; margin-left: 50px; }
 
 @media (max-width: 900px) {
     .footer-content { flex-direction: column; align-items: center; text-align: center; }
@@ -516,15 +451,90 @@ img {
     width: 180px; height: 50px; background-color: var(--primary-green);
     color: #292929; font-weight: 600; text-decoration: none; border-radius: 8px;
 }
-.footer-legal-links {
-    display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
-}
+.footer-legal-links { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
 .footer-legal-links a { color: var(--text-color); text-decoration: none; }
-.social-icons { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
+.error-text-red { color: #FF0000; font-size: 14px; margin-bottom: 5px; }
 
-/* Mensagens de erro senha */
-.error-text-red {
-    color: #FF0000;
+
+/* --- NOVO ESTILO: GAMES GRID LARGE (ADICIONADO) --- */
+.games-grid-large {
+    display: grid;
+    /* Cards maiores (min 220px) e responsivos */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 40px;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+.game-card-large {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    /* Animação suave no conjunto */
+    transition: transform 0.2s ease;
+}
+
+/* O card sobe levemente ao passar o mouse */
+.game-card-large:hover {
+    transform: translateY(-5px);
+}
+
+.game-cover {
+    width: 100%;
+    /* Formato Retangular Vertical (Capa de Jogo) */
+    aspect-ratio: 2 / 3; 
+    background-color: #333;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    border: 3px solid transparent; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover na capa: borda verde brilhante */
+.game-card-large:hover .game-cover {
+    border-color: var(--primary-green);
+    box-shadow: 0 10px 25px rgba(74, 173, 74, 0.3);
+}
+
+.game-name {
+    font-family: var(--font-main);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+.game-origin {
+    font-family: var(--font-sec);
     font-size: 14px;
-    margin-bottom: 5px;
+    color: #aaa;
+    font-weight: 500;
+}
+
+.img-placeholder {
+    color: #888;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    /* Se tiver imagem, o texto some (workaround visual simples) */
+    text-shadow: 0 0 4px rgba(0,0,0,0.8);
+    opacity: 0; /* Esconde se tiver imagem carregada por cima */
+}
+/* Mostra placeholder se não tiver imagem (depende do html) - Opcional */
+.game-cover:not([style*="http"]) .img-placeholder {
+    opacity: 1;
 }
