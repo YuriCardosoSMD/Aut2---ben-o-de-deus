@@ -76,22 +76,43 @@
                             </div>
 
                             <div class="input-group">
-                                <label for="senha" class="input-label-text">Crie sua senha</label>
-                                <input type="password" id="senha" name="senha" class="styled-input" placeholder="Crie uma senha forte">
-                            </div>
-                            <div class="password-requirements-list" style="margin-bottom: 20px; margin-top: -15px">
-                                <div class="error-text-red">A senha deve possuir 10 caracteres.</div>
-                                <div class="error-text-red">A senha deve possuir letras maiúsculas.</div>
-                                <div class="error-text-red">A senha deve possuir números.</div>
-                                <div class="error-text-red">A senha deve possuir caracteres especiais (apenas *, ;, # são permitidos).</div>
-                            </div>
+    <label for="senha" class="input-label-text">Crie sua senha</label>
+    <div style="position: relative;">
+        <input type="password" id="senha" name="senha" class="styled-input" placeholder="Crie uma senha forte" maxlength="50" style="padding-right: 40px;">
+        
+        <span id="toggleSenha" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #575757;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+        </span>
+    </div>
+</div>
+
+<div class="password-requirements-list" style="margin-bottom: 20px; margin-top: 5px">
+    <div id="req-tamanho" class="error-text-red">A senha deve possuir 10 caracteres.</div>
+    <div id="req-maiuscula" class="error-text-red">A senha deve possuir letras maiúsculas.</div>
+    <div id="req-numero" class="error-text-red">A senha deve possuir números.</div>
+    <div id="req-especial" class="error-text-red">A senha deve possuir caracteres especiais (apenas *, ;, # são permitidos).</div>
+</div>
 
                             <div class="input-group">
-                                <label for="senha-confirm" class="input-label-text">Repita sua senha</label>
-                                <input type="password" id="senha-confirm" name="senha_confirm" class="styled-input" placeholder="Digite a senha criada anteriormente">
-                                <div class="repeatpassword-requirements-list" style="margin-bottom: 20px; margin-top: -15px"></div>
-                                <div class="error-text-red">A senha digitada deve ser igual a anterior.</div>
-                            </div>
+    <label for="senha-confirm" class="input-label-text">Repita sua senha</label>
+    <div style="position: relative;">
+        <input type="password" id="senha-confirm" name="senha_confirm" class="styled-input" placeholder="Digite a senha criada anteriormente" maxlength="50" style="padding-right: 40px;">
+        
+        <span id="toggleSenhaConfirm" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #575757;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+        </span>
+    </div>
+    
+    <div style="margin-bottom: 20px; margin-top: 5px">
+        <div id="req-iguais" class="error-text-red">A senha digitada deve ser igual a anterior.</div>
+    </div>
+</div>
                         </div>
 
                         <div class="form-column-right">

@@ -594,3 +594,16 @@ img {
     margin-top: 5px;         /* Um pequeno espaço acima */
     display: block;          /* Garante que fique em linha separada */
 }
+
+/* Adicione ao final do arquivo style.css */
+
+/* Classe para quando o requisito da senha for atendido */
+.valid-text-green {
+    color: var(--primary-green); /* Usa o verde definido no :root (#4AAD4A) */
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+    display: block;
+    text-decoration: line-through; /* Opcional: risca o item concluído */
+    opacity: 0.8;
+}

@@ -78,13 +78,102 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- LÓGICA DO FORMULÁRIO (Questão 1, 2 e 3) ---
+    // --- LÓGICA GERAL DO FORMULÁRIO (Questão 1, 2 e 3) ---
     const form = document.getElementById('cadastroForm');
     const cepInput = document.getElementById('cep');
     const btnLimpar = document.getElementById('btnLimpar');
     const chkSemNumero = document.getElementById('sem-numero');
     const numInput = document.getElementById('numero');
 
+    // --- NOVA LÓGICA DE SENHA (VISIBILIDADE E VALIDAÇÃO EM TEMPO REAL) ---
+    const senhaInput = document.getElementById('senha');
+    const toggleSenhaBtn = document.getElementById('toggleSenha');
+    
+    const senhaConfirmInput = document.getElementById('senha-confirm');
+    const toggleSenhaConfirmBtn = document.getElementById('toggleSenhaConfirm');
+    const reqIguais = document.getElementById('req-iguais');
+
+    // Elementos dos requisitos da senha
+    const reqTamanho = document.getElementById('req-tamanho');
+    const reqMaiuscula = document.getElementById('req-maiuscula');
+    const reqNumero = document.getElementById('req-numero');
+    const reqEspecial = document.getElementById('req-especial');
+
+    // Função auxiliar para alternar classes (Vermelho <-> Verde)
+    function setStatus(element, isValid) {
+        if (!element) return;
+        if (isValid) {
+            element.classList.remove('error-text-red');
+            element.classList.add('valid-text-green');
+        } else {
+            element.classList.remove('valid-text-green');
+            element.classList.add('error-text-red');
+        }
+    }
+
+    // Função para verificar se as senhas conferem
+    function verificarIgualdade() {
+        if (senhaInput && senhaConfirmInput && reqIguais) {
+            const s1 = senhaInput.value;
+            const s2 = senhaConfirmInput.value;
+            // Só valida se os campos não estiverem vazios e forem iguais
+            const saoIguais = (s1 === s2) && (s1.length > 0);
+            setStatus(reqIguais, saoIguais);
+        }
+    }
+
+    // Configuração do Campo de Senha Principal
+    if (senhaInput) {
+        // Alternar visibilidade
+        if (toggleSenhaBtn) {
+            toggleSenhaBtn.addEventListener('click', () => {
+                const tipoAtual = senhaInput.getAttribute('type');
+                const novoTipo = tipoAtual === 'password' ? 'text' : 'password';
+                senhaInput.setAttribute('type', novoTipo);
+                toggleSenhaBtn.style.color = novoTipo === 'text' ? '#4AAD4A' : '#575757';
+            });
+        }
+
+        // Validação ao digitar
+        senhaInput.addEventListener('input', () => {
+            const val = senhaInput.value;
+
+            // Regra 1: Tamanho (>= 10)
+            setStatus(reqTamanho, val.length >= 10);
+
+            // Regra 2: Letras Maiúsculas
+            setStatus(reqMaiuscula, /[A-Z]/.test(val));
+
+            // Regra 3: Números
+            setStatus(reqNumero, /[0-9]/.test(val));
+
+            // Regra 4: Caracteres Especiais (*, ;, #)
+            setStatus(reqEspecial, /[*;#]/.test(val));
+
+            // Verifica igualdade caso a confirmação já tenha sido preenchida
+            verificarIgualdade();
+        });
+    }
+
+    // Configuração do Campo de Confirmação
+    if (senhaConfirmInput) {
+        // Alternar visibilidade
+        if (toggleSenhaConfirmBtn) {
+            toggleSenhaConfirmBtn.addEventListener('click', () => {
+                const tipoAtual = senhaConfirmInput.getAttribute('type');
+                const novoTipo = tipoAtual === 'password' ? 'text' : 'password';
+                senhaConfirmInput.setAttribute('type', novoTipo);
+                toggleSenhaConfirmBtn.style.color = novoTipo === 'text' ? '#4AAD4A' : '#575757';
+            });
+        }
+
+        // Validação ao digitar
+        senhaConfirmInput.addEventListener('input', () => {
+            verificarIgualdade();
+        });
+    }
+
+    // --- RESTANTE DA LÓGICA DO FORMULÁRIO ---
     if (form) {
         
         // Máscara e Integração API de CEP
@@ -133,7 +222,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Botão Limpar
         btnLimpar.addEventListener('click', () => {
-            if(confirm("Deseja limpar todos os campos?")) form.reset();
+            if(confirm("Deseja limpar todos os campos?")) {
+                form.reset();
+                // Reseta visualmente as validações de senha para vermelho
+                [reqTamanho, reqMaiuscula, reqNumero, reqEspecial, reqIguais].forEach(el => {
+                    if(el) {
+                        el.classList.remove('valid-text-green');
+                        el.classList.add('error-text-red');
+                    }
+                });
+            }
         });
 
         // --- SUBMIT DO FORMULÁRIO ---
@@ -141,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const formData = new FormData(form);
 
-            // --- VALIDAÇÕES DA QUESTÃO 1 ---
+            // --- VALIDAÇÕES FINAIS ---
             const nome = formData.get('nome');
             const email = formData.get('email');
             const rua = formData.get('rua');
@@ -178,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Regra de complexidade (Letras + Números + Especiais específicos)
+            // Regra de complexidade
             const temLetra = /[a-zA-Z]/.test(senha);
             const temNumero = /[0-9]/.test(senha);
             const temEspecial = /[*;#]/.test(senha);
@@ -198,30 +296,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok) {
-    alert("Usuário cadastrado com sucesso!");
+                    alert("Usuário cadastrado com sucesso!");
 
-    // REQUISITO DA QUESTÃO 1: Limpar a página visual e exibir o JSON
-    const mainContent = document.getElementById('main-content'); // Certifique-se que seu <main> tem id="main-content"
-    
-    // Formata o JSON para HTML bonito
-    const jsonOutput = JSON.stringify(result.usuario, null, 4);
-    
-    mainContent.innerHTML = `
-        <section class="container" style="padding: 100px 20px; text-align: center;">
-            <h2 style="font-size: 32px; color: var(--primary-green); margin-bottom: 20px;">Dados Submetidos com Sucesso!</h2>
-            <div style="background: #111; padding: 20px; border-radius: 8px; text-align: left; display: inline-block; max-width: 100%; overflow-x: auto;">
-                <pre style="color: #0f0; font-family: monospace;">${jsonOutput}</pre>
-            </div>
-            <br><br>
-            <a href="listagem.html" class="btn-signup" style="display: inline-block;">Ver Listagem</a>
-            <a href="cadastro.html" class="btn-primary" style="margin-left: 20px;">Novo Cadastro</a>
-        </section>
-    `;
-    
-    // Rola a página para o topo para o usuário ver
-    window.scrollTo(0, 0);
-} else {
-                    // Exibe erro vindo do servidor (ex: SQL Injection ou Validação Falhou)
+                    // Limpar a página visual e exibir o JSON
+                    const mainContent = document.getElementById('main-content');
+                    
+                    // Formata o JSON para HTML bonito
+                    const jsonOutput = JSON.stringify(result.usuario, null, 4);
+                    
+                    mainContent.innerHTML = `
+                        <section class="container" style="padding: 100px 20px; text-align: center;">
+                            <h2 style="font-size: 32px; color: var(--primary-green); margin-bottom: 20px;">Dados Submetidos com Sucesso!</h2>
+                            <div style="background: #111; padding: 20px; border-radius: 8px; text-align: left; display: inline-block; max-width: 100%; overflow-x: auto;">
+                                <pre style="color: #0f0; font-family: monospace;">${jsonOutput}</pre>
+                            </div>
+                            <br><br>
+                            <a href="listagem.html" class="btn-signup" style="display: inline-block;">Ver Listagem</a>
+                            <a href="cadastro.html" class="btn-primary" style="margin-left: 20px;">Novo Cadastro</a>
+                        </section>
+                    `;
+                    
+                    window.scrollTo(0, 0);
+
+                } else {
                     alert("Erro do Servidor: " + result.error);
                 }
             } catch (error) {
