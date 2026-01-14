@@ -177,8 +177,8 @@ img {
     z-index: 1;
     
     /* Gradiente Roxo/Verde com Opacidade */
-    opacity: 0.80;
-    background: linear-gradient(180deg, rgba(198, 125, 255, 0.31) 0%, rgba(76, 175, 81, 0.27) 47%, rgba(41, 41, 41, 0.35) 98%);
+    opacity: 1.00;
+    background: linear-gradient(180deg, rgba(75, 0, 130, 0.31) 0%, rgba(0, 100, 0, 0.27) 47%, rgba(0, 0, 0, 0.35) 98%);
 }
 
 .hero-grid {
@@ -392,11 +392,11 @@ img {
     font-weight: 600;
     text-transform: uppercase;
     text-shadow: 0 0 4px rgba(0,0,0,0.8);
-    opacity: 0;
+    opacity: 1.00;
 }
 
 .game-cover:not([style*="http"]) .img-placeholder {
-    opacity: 1;
+    opacity: 1.00;
 }
 
 /* Legacy Games Grid (Compatibilidade) */
@@ -504,7 +504,7 @@ img {
 /* --- Footer --- */
 .main-footer {
     position: relative;
-    padding: 80px 0;
+    padding: 80px 0 0;
     color: var(--text-color);
     background-image: url('assets/fundo.jpeg'); /* Fundo igual ao Sobre */
     background-size: cover;
@@ -520,8 +520,8 @@ img {
     z-index: 1;
     
     /* Mesmo gradiente do Hero */
-    opacity: 0.80;
-    background: linear-gradient(180deg, rgba(198, 125, 255, 0.31) 0%, rgba(76, 175, 81, 0.27) 47%, rgba(41, 41, 41, 0.35) 98%);
+    opacity: 1.00;
+    background: linear-gradient(180deg, rgba(75, 0, 130, 0.31) 0%, rgba(0, 100, 0, 0.27) 47%, rgba(0, 0, 0, 0.35) 98%);
 }
 
 .footer-content {
