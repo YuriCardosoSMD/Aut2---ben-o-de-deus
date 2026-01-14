@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA DA LISTAGEM DE USUÁRIOS (Existente) ---
     const usersGrid = document.querySelector('.users-grid');
     if (usersGrid) {
-        // Tenta buscar usuários
+        // Apenas exemplo, evita erro se não houver backend
         fetch('/listar_usurios').catch(() => []); 
     }
 
@@ -16,241 +16,227 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (form) {
         
-        // === Questão 2: Integração API de CEP & Máscara ===
+        /* ==================================================================
+           QUESTÃO 2: INTEGRAÇÃO API DE CEP E PREENCHIMENTO AUTOMÁTICO
+           ================================================================== */
         
-        // Máscara 00000-000 aplicada ao digitar
+        // 1. Máscara do CEP (00000-000) enquanto digita
         cepInput.addEventListener('input', (e) => {
-            let val = e.target.value.replace(/\D/g, ''); // Remove não números
+            let val = e.target.value.replace(/\D/g, ''); // Remove letras/símbolos
             
-            // Limita a 8 dígitos numéricos no total para a lógica
-            if (val.length > 8) val = val.slice(0, 8);
+            if (val.length > 8) val = val.slice(0, 8); // Trava em 8 dígitos
 
-            // Adiciona o hífen visualmente
             if (val.length > 5) {
-                val = val.substring(0, 5) + '-' + val.substring(5);
+                val = val.substring(0, 5) + '-' + val.substring(5); // Adiciona hífen
             }
             e.target.value = val;
         });
 
-        // Busca na API ViaCEP ao sair do campo (blur)
+        // 2. Busca na API ViaCEP ao sair do campo (evento 'blur')
         cepInput.addEventListener('blur', async () => {
             const cep = cepInput.value.replace(/\D/g, '');
             
             if (cep.length === 8) {
                 try {
-                    // Feedback visual de carregamento
-                    document.getElementById('rua').value = "Carregando...";
+                    // Aviso visual de carregamento
+                    document.getElementById('rua').value = "Buscando endereço...";
+                    document.getElementById('cidade').value = "...";
                     
+                    // Chamada à API Pública
                     const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
                     const data = await res.json();
                     
                     if (!data.erro) {
+                        // Preenche os campos automaticamente
                         document.getElementById('rua').value = data.logradouro;
                         document.getElementById('bairro').value = data.bairro;
                         document.getElementById('cidade').value = data.localidade;
                         document.getElementById('estado').value = data.uf;
                         
-                        // Foca no número
-                        numInput.focus();
-                        
-                        // Remove erros visuais dos campos preenchidos
+                        // Remove erros visuais caso existam
                         ['rua', 'bairro', 'cidade', 'estado'].forEach(id => {
                             document.getElementById(id).classList.remove('input-error');
                         });
+
+                        // Foca no campo NÚMERO (obrigatório)
+                        numInput.focus();
                     } else {
-                        alert("CEP não encontrado!");
+                        alert("CEP não encontrado na base de dados!");
                         document.getElementById('rua').value = "";
+                        document.getElementById('cidade').value = "";
                     }
                 } catch (e) {
-                    console.error("Erro no ViaCEP", e);
-                    alert("Erro ao consultar CEP.");
+                    console.error("Erro na requisição ViaCEP", e);
+                    alert("Erro ao conectar com o serviço de CEP.");
+                    document.getElementById('rua').value = "";
                 }
             }
         });
 
-        // Lógica Checkbox "Sem Número"
+        // 3. Lógica do Checkbox "Não se aplica" (Sem Número)
         if(chkSemNumero) {
             chkSemNumero.addEventListener('change', (e) => {
                 if(e.target.checked) {
-                    numInput.value = "SN";
-                    numInput.readOnly = true;
-                    // Remove erro visual se houver
-                    numInput.classList.remove('input-error');
-                    numInput.style.border = "none";
+                    numInput.value = "SN";       // Preenche com SN
+                    numInput.readOnly = true;    // Bloqueia edição
+                    numInput.classList.remove('input-error'); // Remove erro visual
+                    numInput.style.backgroundColor = "#e0e0e0";
                 } else {
-                    numInput.value = "";
-                    numInput.readOnly = false;
+                    numInput.value = "";         // Limpa
+                    numInput.readOnly = false;   // Libera edição
+                    numInput.style.backgroundColor = "#C3C3C3"; // Volta cor original
                 }
             });
         }
 
-        // === Questão 1: Botões e Validação ===
+        /* ==================================================================
+           QUESTÃO 1: VALIDAÇÕES E BOTÕES
+           ================================================================== */
 
         // Botão Limpar
         btnLimpar.addEventListener('click', () => {
-            if(confirm("Deseja realmente limpar todos os campos?")) {
+            if(confirm("Tem certeza que deseja limpar todos os campos?")) {
                 form.reset();
-                // Reseta estado visual de erros
                 document.querySelectorAll('.styled-input').forEach(el => el.classList.remove('input-error'));
-                // Reseta estado do campo número se necessário
+                
+                // Reseta visual do campo número
                 if(numInput.readOnly) {
                     numInput.readOnly = false;
+                    numInput.style.backgroundColor = "#C3C3C3";
                 }
             }
         });
 
-        // Enviar com Validação
+        // Evento de Enviar (Submit) com Validação Completa
         form.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o envio padrão
+            e.preventDefault();
 
             const formData = new FormData(form);
             const dados = Object.fromEntries(formData);
             let erros = [];
 
-            // Função auxiliar para marcar campo com erro
+            // Função para marcar erro visualmente
             const marcarErro = (id) => {
                 const el = document.getElementById(id);
                 if(el) el.classList.add('input-error');
             };
 
-            // Limpa erros visuais antes de validar
+            // Limpa erros anteriores
             document.querySelectorAll('.styled-input').forEach(el => el.classList.remove('input-error'));
 
-            // 1. Validação Nome (Min 3 e Max 50)
+            // --- Regras de Validação ---
+
+            // Nome
             if (!dados.nome || dados.nome.trim().length < 3 || dados.nome.length > 50) {
-                erros.push("Nome: Deve ter entre 3 e 50 caracteres.");
+                erros.push("Nome: Entre 3 e 50 caracteres.");
                 marcarErro('nome');
             }
 
-            // 2. Validação E-mail (Formato estrito ccc@ddd.ccc)
-            // Regex: caracteres + @ + caracteres + . + caracteres (pelo menos 2)
+            // E-mail (Formato rigoroso)
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
             if (!emailRegex.test(dados.email)) {
-                erros.push("E-mail: Formato inválido. Ex: nome@dominio.com");
+                erros.push("E-mail: Formato inválido (ex: joao@site.com).");
                 marcarErro('email');
             }
 
-            // 3. Endereço (Rua) - Mínimo 4 caracteres
+            // Endereço (Rua)
             if (!dados.rua || dados.rua.trim().length < 4) {
-                erros.push("Endereço: A rua deve ter no mínimo 4 caracteres.");
+                erros.push("Rua: Mínimo de 4 caracteres.");
                 marcarErro('rua');
             }
 
-            // 4. Número (Obrigatório ou SN)
+            // Número (QUESTÃO 2: Obrigatório ou SN)
             if (!dados.numero || dados.numero.trim() === "") {
-                erros.push("Número: Obrigatório (ou marque 'Não se aplica').");
+                erros.push("Número: Campo obrigatório (ou marque 'Não se aplica').");
                 marcarErro('numero');
             }
 
-            // 5. CEP (Formato 00000-000)
+            // CEP
             const cepLimpo = dados.cep.replace(/\D/g, '');
             if (cepLimpo.length !== 8) {
-                erros.push("CEP: Deve conter 8 dígitos.");
+                erros.push("CEP: Formato inválido (8 dígitos).");
                 marcarErro('cep');
             }
 
-            // 6. Cidade - Mínimo 3 caracteres
+            // Cidade
             if (!dados.cidade || dados.cidade.trim().length < 3) {
                 erros.push("Cidade: Mínimo de 3 caracteres.");
                 marcarErro('cidade');
             }
 
-            // 7. Estado - Exatamente 2 caracteres
+            // Estado
             if (!dados.estado || dados.estado.trim().length !== 2) {
-                erros.push("Estado: Deve conter exatamente a sigla de 2 letras (ex: CE).");
+                erros.push("Estado: Use a sigla (ex: CE).");
                 marcarErro('estado');
             }
 
-            // 8. Senha
-            // Min 10 chars, Letras, Números, Especiais APENAS (* ; #)
+            // Senha (Complexa)
             const senha = dados.senha;
-            const temTamanho = senha.length >= 10;
-            const temLetra = /[a-zA-Z]/.test(senha);
-            const temNumero = /[0-9]/.test(senha);
-            const temEspecialValido = /[*;#]/.test(senha); // Tem que ter pelo menos um desses
-            // Verifica se tem algo que NÃO seja letra, número ou (*;#)
-            const temCaractereInvalido = /[^a-zA-Z0-9*;#]/.test(senha);
+            const validacaoSenha = 
+                senha.length >= 10 &&
+                /[a-zA-Z]/.test(senha) &&     // Tem letra
+                /[0-9]/.test(senha) &&        // Tem número
+                /[*;#]/.test(senha) &&        // Tem especial permitido
+                !/[^a-zA-Z0-9*;#]/.test(senha); // NÃO tem caractere proibido
 
-            if (!temTamanho || !temLetra || !temNumero || !temEspecialValido) {
-                erros.push("Senha: Requisitos não atendidos (Min 10 chars, letras, números e especiais * ; #).");
-                marcarErro('senha');
-            } else if (temCaractereInvalido) {
-                erros.push("Senha: Caracteres inválidos detectados. Apenas *, ; e # são permitidos como especiais.");
+            if (!validacaoSenha) {
+                erros.push("Senha: Min 10 caracteres, letras, números e apenas (* ; #).");
                 marcarErro('senha');
             }
 
-            // 9. Repetir Senha
+            // Repetir Senha
             if (dados.senha !== dados.senha_confirm) {
-                erros.push("Repetir Senha: As senhas não conferem.");
+                erros.push("Confirmação de Senha: As senhas não conferem.");
                 marcarErro('senha-confirm');
             }
 
-            // --- Resultado da Validação ---
+            // --- Decisão Final ---
             if (erros.length > 0) {
-                alert("Por favor, corrija os erros:\n\n- " + erros.join("\n- "));
+                alert("Erros encontrados:\n\n- " + erros.join("\n- "));
             } else {
-                // SUCESSO!
                 exibirJSONNaTela(dados);
             }
         });
     }
 
-    // Função para limpar a tela e mostrar JSON (Requisito Questão 1)
+    // Função de Sucesso (Exibe JSON)
     function exibirJSONNaTela(dados) {
-        // Remove campos desnecessários para o JSON final
-        delete dados.senha_confirm;
+        delete dados.senha_confirm; // Remove redundância
 
-        // Limpa o conteúdo visual da página
-        document.body.innerHTML = '';
+        document.body.innerHTML = ''; // Limpa tela
         
-        // Cria container estilo "Console Hacker"
+        // Estilos do container de sucesso
         document.body.style.backgroundColor = '#0d0d0d';
+        document.body.style.color = '#4AAD4A';
         document.body.style.display = 'flex';
         document.body.style.flexDirection = 'column';
-        document.body.style.justifyContent = 'center';
         document.body.style.alignItems = 'center';
+        document.body.style.justifyContent = 'center';
         document.body.style.minHeight = '100vh';
-        document.body.style.margin = '0';
         document.body.style.fontFamily = "'Courier New', monospace";
 
-        const container = document.createElement('div');
-        container.style.width = '80%';
-        container.style.maxWidth = '800px';
-        container.style.backgroundColor = '#1e1e1e';
-        container.style.border = '2px solid #4AAD4A';
-        container.style.borderRadius = '10px';
-        container.style.padding = '30px';
-        container.style.boxShadow = '0 0 20px rgba(74, 173, 74, 0.2)';
-        
-        const titulo = document.createElement('h2');
-        titulo.innerText = '> DADOS ENVIADOS COM SUCESSO_';
-        titulo.style.color = '#4AAD4A';
-        titulo.style.textAlign = 'center';
-        titulo.style.marginBottom = '20px';
+        const title = document.createElement('h1');
+        title.innerText = "> CADASTRO REALIZADO_";
 
-        const pre = document.createElement('pre');
-        pre.style.color = '#f0f0f0';
-        pre.style.fontSize = '16px';
-        pre.style.whiteSpace = 'pre-wrap';
-        pre.style.wordBreak = 'break-all';
-        
-        // Converte objeto para JSON string identada
-        pre.innerText = JSON.stringify(dados, null, 4);
+        const code = document.createElement('pre');
+        code.style.background = '#1e1e1e';
+        code.style.padding = '20px';
+        code.style.border = '1px solid #4AAD4A';
+        code.style.borderRadius = '5px';
+        code.innerText = JSON.stringify(dados, null, 4);
 
-        const btnVoltar = document.createElement('a');
-        btnVoltar.innerText = '[ VOLTAR PARA O INÍCIO ]';
-        btnVoltar.href = 'cadastro.html'; 
-        btnVoltar.style.display = 'block';
-        btnVoltar.style.marginTop = '30px';
-        btnVoltar.style.textAlign = 'center';
-        btnVoltar.style.color = '#4AAD4A';
-        btnVoltar.style.textDecoration = 'none';
-        btnVoltar.style.fontWeight = 'bold';
-        btnVoltar.style.cursor = 'pointer';
+        const btn = document.createElement('button');
+        btn.innerText = "VOLTAR";
+        btn.style.marginTop = '20px';
+        btn.style.padding = '10px 30px';
+        btn.style.background = '#4AAD4A';
+        btn.style.border = 'none';
+        btn.style.fontWeight = 'bold';
+        btn.style.cursor = 'pointer';
+        btn.onclick = () => window.location.reload();
 
-        container.appendChild(titulo);
-        container.appendChild(pre);
-        container.appendChild(btnVoltar);
-        document.body.appendChild(container);
+        document.body.appendChild(title);
+        document.body.appendChild(code);
+        document.body.appendChild(btn);
     }
 });
