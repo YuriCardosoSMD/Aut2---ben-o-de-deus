@@ -585,3 +585,12 @@ img {
     color: var(--text-color); 
     text-decoration: none; 
 }
+
+/* Estilo para textos de erro em vermelho */
+.error-text-red {
+    color: var(--error-red); /* Usa o vermelho definido no seu :root (#FF6666) */
+    font-size: 14px;         /* Tamanho um pouco menor que o texto padrão */
+    font-weight: 600;        /* Levemente mais grosso para destaque */
+    margin-top: 5px;         /* Um pequeno espaço acima */
+    display: block;          /* Garante que fique em linha separada */
+}
