@@ -177,7 +177,7 @@ img {
     z-index: 1;
     
     /* Gradiente Roxo/Verde com Opacidade */
-    opacity: 0.75;
+    opacity: 0.80;
     background: linear-gradient(180deg, rgba(198, 125, 255, 0.31) 0%, rgba(76, 175, 81, 0.27) 47%, rgba(41, 41, 41, 0.35) 98%);
 }
 
@@ -197,7 +197,7 @@ img {
 .hero-text h2 {
     font-size: 3rem;
     font-weight: 700;
-    color: var(--primary-green);
+    color: var(--text-color);
     margin-bottom: 20px;
 }
 
@@ -520,7 +520,7 @@ img {
     z-index: 1;
     
     /* Mesmo gradiente do Hero */
-    opacity: 0.60;
+    opacity: 0.80;
     background: linear-gradient(180deg, rgba(198, 125, 255, 0.31) 0%, rgba(76, 175, 81, 0.27) 47%, rgba(41, 41, 41, 0.35) 98%);
 }
 
