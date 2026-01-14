@@ -556,9 +556,9 @@ img {
 
 .footer-actions { 
     display: flex; 
-    gap: 50px; 
+    gap: 75px; 
     flex-wrap: wrap; 
-    margin-left: 150px; 
+    margin-left: 100px; 
 }
 
 .btn-footer {

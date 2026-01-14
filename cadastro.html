@@ -79,18 +79,17 @@
                                 <label for="senha" class="input-label-text">Crie sua senha</label>
                                 <input type="password" id="senha" name="senha" class="styled-input" placeholder="Crie uma senha forte">
                             </div>
-
-                            <div class="password-requirements-list" style="margin-bottom: 20px;">
+                            <div class="password-requirements-list" style="margin-bottom: 20px; margin-top: -15px">
                                 <div class="error-text-red">A senha deve possuir 10 caracteres.</div>
-                                <div class="error-text-red">A senha deve possuir letras e números.</div>
-                                <div class="error-text-red">
-                                    A senha deve possuir caracteres especiais (*, ;, #).
-                                </div>
+                                <div class="error-text-red">A senha deve possuir letras maiúsculas.</div>
+                                <div class="error-text-red">A senha deve possuir números.</div>
+                                <div class="error-text-red">A senha deve possuir caracteres especiais (apenas *, ;, # são permitidos).</div>
                             </div>
 
                             <div class="input-group">
                                 <label for="senha-confirm" class="input-label-text">Repita sua senha</label>
                                 <input type="password" id="senha-confirm" name="senha_confirm" class="styled-input" placeholder="Digite a senha criada anteriormente">
+                                <div class="error-text-red">A senha digitada deve ser igual a anterior.</div>
                             </div>
                         </div>
 
