@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
+    
     <a href="home.html" class="btn-back-home">
         <svg viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M4.82757 16.97L18.9696 31.112L16.1416 33.94L0.585573 18.384C0.210631 18.0089 0 17.5003 0 16.97C0 16.4397 0.210631 15.9311 0.585573 15.556L16.1416 0L18.9696 2.828L4.82757 16.97Z" fill="currentColor"/>
@@ -33,27 +34,19 @@
         <section class="cadastro-hero">
             <div class="hero-overlay"></div>
             <div class="container hero-content-centered">
-                <div class="hero-big-title">
-                    Faça parte do nosso sonho!
-                </div>
-                <div class="hero-subtitle">
-                    Cadastre-se para se tornar parte da nossa família!
-                </div>
-                <div class="hero-link-policy">
-                    Política de Privacidade
-                </div>
+                <div class="hero-big-title">Faça parte do nosso sonho!</div>
+                <div class="hero-subtitle">Cadastre-se para se tornar parte da nossa família!</div>
+                <div class="hero-link-policy">Política de Privacidade</div>
             </div>
         </section>
 
         <section class="form-layout-section">
             <div class="container">
-                
-                <div class="form-main-title">
-                    Formulário de Preenchimento
-                </div>
+                <div class="form-main-title">Formulário de Preenchimento</div>
 
                 <form id="cadastroForm" class="styled-form" autocomplete="off">
                     <div class="forms-grid">
+                        
                         <div class="form-column-left">
                             <h3 class="input-label-text" style="font-size: 24px; font-weight: 400; margin-bottom: 30px; text-align: center;">Informações Pessoais</h3>
                             
@@ -79,7 +72,6 @@
                                 <label for="senha" class="input-label-text">Crie sua senha</label>
                                 <div style="position: relative;">
                                     <input type="password" id="senha" name="senha" class="styled-input" placeholder="Crie uma senha forte" maxlength="50" style="padding-right: 40px;">
-                                    
                                     <span id="toggleSenha" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #575757;">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -100,7 +92,6 @@
                                 <label for="senha-confirm" class="input-label-text">Repita sua senha</label>
                                 <div style="position: relative;">
                                     <input type="password" id="senha-confirm" name="senha_confirm" class="styled-input" placeholder="Digite a senha criada anteriormente" maxlength="50" style="padding-right: 40px;">
-                                    
                                     <span id="toggleSenhaConfirm" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #575757;">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -108,7 +99,6 @@
                                         </svg>
                                     </span>
                                 </div>
-                                
                                 <div style="margin-bottom: 20px; margin-top: 5px">
                                     <div id="req-iguais" class="error-text-red">A senha digitada deve ser igual a anterior.</div>
                                 </div>

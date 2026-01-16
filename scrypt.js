@@ -1,11 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- LÓGICA DA LISTAGEM DE USUÁRIOS (Questão 4) ---
+    // Seleção de elementos da página de Listagem
     const usersGrid = document.querySelector('.users-grid');
-    if (usersGrid) {
-        carregarUsuarios(1);
+
+    // Seleção de elementos da página de Cadastro
+    const form = document.getElementById('cadastroForm');
+    const cepInput = document.getElementById('cep');
+    const btnLimpar = document.getElementById('btnLimpar');
+    const chkSemNumero = document.getElementById('sem-numero');
+    const numInput = document.getElementById('numero');
+    
+    // Elementos de Senha
+    const senhaInput = document.getElementById('senha');
+    const toggleSenhaBtn = document.getElementById('toggleSenha');
+    const senhaConfirmInput = document.getElementById('senha-confirm');
+    const toggleSenhaConfirmBtn = document.getElementById('toggleSenhaConfirm');
+    
+    // Elementos de Feedback Visual (Requisitos de Senha)
+    const reqIguais = document.getElementById('req-iguais');
+    const reqTamanho = document.getElementById('req-tamanho');
+    const reqMaiuscula = document.getElementById('req-maiuscula');
+    const reqNumero = document.getElementById('req-numero');
+    const reqEspecial = document.getElementById('req-especial');
+
+    // Funções Auxiliares ---------------------------------------------------
+
+    // Altera a cor do texto de validação (Verde para OK, Vermelho para Erro)
+    function setStatus(element, isValid) {
+        if (!element) return;
+        if (isValid) {
+            element.classList.remove('error-text-red');
+            element.classList.add('valid-text-green');
+        } else {
+            element.classList.remove('valid-text-green');
+            element.classList.add('error-text-red');
+        }
     }
 
+    // Verifica se os campos de senha e confirmação são idênticos
+    function verificarIgualdade() {
+        if (senhaInput && senhaConfirmInput && reqIguais) {
+            const s1 = senhaInput.value;
+            const s2 = senhaConfirmInput.value;
+            const saoIguais = (s1 === s2) && (s1.length > 0);
+            setStatus(reqIguais, saoIguais);
+        }
+    }
+
+    // Busca os usuários no servidor e monta a tabela HTML
     async function carregarUsuarios(pagina) {
         try {
             const container = document.querySelector('.users-grid');
@@ -20,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Tabela HTML
             let html = `
                 <div style="overflow-x:auto;">
                     <table style="width: 100%; border-collapse: collapse; color: #fff; background: #1e1e1e; border-radius: 8px; overflow: hidden;">
@@ -50,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             html += `</tbody></table></div>`;
 
-            // Paginação
+            // Botões de navegação da paginação
             html += `
                 <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
                     <button id="btnPrev" style="padding: 8px 16px; cursor: pointer; background: #4AAD4A; border: none; color: white; border-radius: 4px;" ${data.paginaAtual === 1 ? 'disabled style="opacity:0.5"' : ''}>Anterior</button>
@@ -64,12 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const btnPrev = document.getElementById('btnPrev');
             const btnNext = document.getElementById('btnNext');
 
-            if(btnPrev && !btnPrev.disabled) {
-                btnPrev.onclick = () => carregarUsuarios(data.paginaAtual - 1);
-            }
-            if(btnNext && !btnNext.disabled) {
-                btnNext.onclick = () => carregarUsuarios(data.paginaAtual + 1);
-            }
+            if(btnPrev && !btnPrev.disabled) btnPrev.onclick = () => carregarUsuarios(data.paginaAtual - 1);
+            if(btnNext && !btnNext.disabled) btnNext.onclick = () => carregarUsuarios(data.paginaAtual + 1);
 
         } catch (error) {
             console.error("Erro ao listar:", error);
@@ -77,106 +114,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Lógica da Página de Listagem -----------------------------------------
+    if (usersGrid) {
+        carregarUsuarios(1);
+    }
 
-    // --- LÓGICA GERAL DO FORMULÁRIO (Questão 1, 2 e 3) ---
-    const form = document.getElementById('cadastroForm');
-    const cepInput = document.getElementById('cep');
-    const btnLimpar = document.getElementById('btnLimpar');
-    const chkSemNumero = document.getElementById('sem-numero');
-    const numInput = document.getElementById('numero');
-
-    // --- NOVA LÓGICA DE SENHA (VISIBILIDADE E VALIDAÇÃO EM TEMPO REAL) ---
-    const senhaInput = document.getElementById('senha');
-    const toggleSenhaBtn = document.getElementById('toggleSenha');
+    // Lógica da Página de Cadastro -----------------------------------------
     
-    const senhaConfirmInput = document.getElementById('senha-confirm');
-    const toggleSenhaConfirmBtn = document.getElementById('toggleSenhaConfirm');
-    const reqIguais = document.getElementById('req-iguais');
-
-    // Elementos dos requisitos da senha
-    const reqTamanho = document.getElementById('req-tamanho');
-    const reqMaiuscula = document.getElementById('req-maiuscula');
-    const reqNumero = document.getElementById('req-numero');
-    const reqEspecial = document.getElementById('req-especial');
-
-    // Função auxiliar para alternar classes (Vermelho <-> Verde)
-    function setStatus(element, isValid) {
-        if (!element) return;
-        if (isValid) {
-            element.classList.remove('error-text-red');
-            element.classList.add('valid-text-green');
-        } else {
-            element.classList.remove('valid-text-green');
-            element.classList.add('error-text-red');
-        }
+    // Configurações de visibilidade da senha (olho)
+    if (senhaInput && toggleSenhaBtn) {
+        toggleSenhaBtn.addEventListener('click', () => {
+            const tipoAtual = senhaInput.getAttribute('type');
+            const novoTipo = tipoAtual === 'password' ? 'text' : 'password';
+            senhaInput.setAttribute('type', novoTipo);
+            toggleSenhaBtn.style.color = novoTipo === 'text' ? '#4AAD4A' : '#575757';
+        });
     }
 
-    // Função para verificar se as senhas conferem
-    function verificarIgualdade() {
-        if (senhaInput && senhaConfirmInput && reqIguais) {
-            const s1 = senhaInput.value;
-            const s2 = senhaConfirmInput.value;
-            // Só valida se os campos não estiverem vazios e forem iguais
-            const saoIguais = (s1 === s2) && (s1.length > 0);
-            setStatus(reqIguais, saoIguais);
-        }
+    if (senhaConfirmInput && toggleSenhaConfirmBtn) {
+        toggleSenhaConfirmBtn.addEventListener('click', () => {
+            const tipoAtual = senhaConfirmInput.getAttribute('type');
+            const novoTipo = tipoAtual === 'password' ? 'text' : 'password';
+            senhaConfirmInput.setAttribute('type', novoTipo);
+            toggleSenhaConfirmBtn.style.color = novoTipo === 'text' ? '#4AAD4A' : '#575757';
+        });
     }
 
-    // Configuração do Campo de Senha Principal
+    // Validação em tempo real dos requisitos de senha
     if (senhaInput) {
-        // Alternar visibilidade
-        if (toggleSenhaBtn) {
-            toggleSenhaBtn.addEventListener('click', () => {
-                const tipoAtual = senhaInput.getAttribute('type');
-                const novoTipo = tipoAtual === 'password' ? 'text' : 'password';
-                senhaInput.setAttribute('type', novoTipo);
-                toggleSenhaBtn.style.color = novoTipo === 'text' ? '#4AAD4A' : '#575757';
-            });
-        }
-
-        // Validação ao digitar
         senhaInput.addEventListener('input', () => {
             const val = senhaInput.value;
-
-            // Regra 1: Tamanho (>= 10)
             setStatus(reqTamanho, val.length >= 10);
-
-            // Regra 2: Letras Maiúsculas
             setStatus(reqMaiuscula, /[A-Z]/.test(val));
-
-            // Regra 3: Números
             setStatus(reqNumero, /[0-9]/.test(val));
-
-            // Regra 4: Caracteres Especiais (*, ;, #)
             setStatus(reqEspecial, /[*;#]/.test(val));
-
-            // Verifica igualdade caso a confirmação já tenha sido preenchida
             verificarIgualdade();
         });
     }
 
-    // Configuração do Campo de Confirmação
     if (senhaConfirmInput) {
-        // Alternar visibilidade
-        if (toggleSenhaConfirmBtn) {
-            toggleSenhaConfirmBtn.addEventListener('click', () => {
-                const tipoAtual = senhaConfirmInput.getAttribute('type');
-                const novoTipo = tipoAtual === 'password' ? 'text' : 'password';
-                senhaConfirmInput.setAttribute('type', novoTipo);
-                toggleSenhaConfirmBtn.style.color = novoTipo === 'text' ? '#4AAD4A' : '#575757';
-            });
-        }
-
-        // Validação ao digitar
         senhaConfirmInput.addEventListener('input', () => {
             verificarIgualdade();
         });
     }
 
-    // --- RESTANTE DA LÓGICA DO FORMULÁRIO ---
+    // Lógica do formulário de cadastro
     if (form) {
         
-        // Máscara e Integração API de CEP
+        // Formatação automática e busca de CEP
         cepInput.addEventListener('input', (e) => {
             let val = e.target.value.replace(/\D/g, ''); 
             if (val.length > 8) val = val.slice(0, 8);
@@ -207,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Lógica do Checkbox "Sem Número"
+        // Checkbox para desabilitar o número do endereço
         if(chkSemNumero) {
             chkSemNumero.addEventListener('change', (e) => {
                 if(e.target.checked) {
@@ -220,35 +205,21 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // --- LÓGICA DO BOTÃO LIMPAR (ATUALIZADA) ---
+        // Botão de limpar: reseta campos e estados visuais
         btnLimpar.addEventListener('click', () => {
-            // 1. Popup de Confirmação
             if (confirm("Tem certeza que deseja limpar todos os campos preenchidos?")) {
-                
-                // 2. Reseta os valores padrão do formulário (Inputs de texto, checkbox, radio)
                 form.reset();
-
-                // 3. Garante o reset de estados dinâmicos do JavaScript:
                 
-                // a) Destrava o campo "Número" caso o checkbox "Sem Número" tenha sido usado
                 if (numInput) {
                     numInput.readOnly = false;
                     numInput.value = ""; 
                 }
 
-                // b) Volta os campos de senha para o modo oculto (password) se estiverem visíveis
-                if (senhaInput) {
-                    senhaInput.setAttribute('type', 'password');
-                }
-                if (senhaConfirmInput) {
-                    senhaConfirmInput.setAttribute('type', 'password');
-                }
-
-                // c) Reseta a cor dos ícones de "olho" (volta para cinza)
+                if (senhaInput) senhaInput.setAttribute('type', 'password');
+                if (senhaConfirmInput) senhaConfirmInput.setAttribute('type', 'password');
                 if (toggleSenhaBtn) toggleSenhaBtn.style.color = '#575757';
                 if (toggleSenhaConfirmBtn) toggleSenhaConfirmBtn.style.color = '#575757';
 
-                // 4. Reseta visualmente as validações de senha (tudo volta para vermelho)
                 [reqTamanho, reqMaiuscula, reqNumero, reqEspecial, reqIguais].forEach(el => {
                     if (el) {
                         el.classList.remove('valid-text-green');
@@ -258,12 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // --- SUBMIT DO FORMULÁRIO ---
+        // Envio do formulário com validações finais
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
 
-            // --- VALIDAÇÕES FINAIS ---
             const nome = formData.get('nome');
             const email = formData.get('email');
             const rua = formData.get('rua');
@@ -272,25 +242,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const senha = formData.get('senha');
             const senhaConfirm = formData.get('senha_confirm');
 
-            // 1. Nome (Alterado para mínimo de 3 caracteres)
             if (!nome || nome.length < 3 || nome.length > 50) {
                 alert("O nome deve ter entre 3 e 50 caracteres.");
                 return;
             }
 
-            // 2. E-mail (Regex rigoroso: ccc@ddd.ccc)
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\.]+$/;
             if (!emailRegex.test(email)) {
                 alert("E-mail inválido! Formato esperado: exemplo@dominio.com");
                 return;
             }
 
-            // 3. Endereço e Cidade
             if (rua.length < 4) { alert("O endereço (Rua) deve ter no mínimo 4 caracteres."); return; }
             if (cidade.length < 3) { alert("A cidade deve ter no mínimo 3 caracteres."); return; }
             if (estado.length !== 2) { alert("O estado deve ter exatamente 2 caracteres (Sigla)."); return; }
 
-            // 4. Senha e Validação
             if (senha.length < 10) {
                 alert("A senha deve ter no mínimo 10 caracteres.");
                 return;
@@ -300,7 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Regra de complexidade
             const temLetra = /[a-zA-Z]/.test(senha);
             const temNumero = /[0-9]/.test(senha);
             const temEspecial = /[*;#]/.test(senha);
@@ -310,7 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Envio para o Backend
             try {
                 const response = await fetch('http://localhost:5000/cadastrar_usuario', {
                     method: 'POST',
@@ -322,10 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     alert("Usuário cadastrado com sucesso!");
 
-                    // Limpar a página visual e exibir o JSON
                     const mainContent = document.getElementById('main-content');
-                    
-                    // Formata o JSON para HTML bonito
                     const jsonOutput = JSON.stringify(result.usuario, null, 4);
                     
                     mainContent.innerHTML = `
@@ -339,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="cadastro.html" class="btn-primary" style="margin-left: 20px;">Novo Cadastro</a>
                         </section>
                     `;
-                    
                     window.scrollTo(0, 0);
 
                 } else {

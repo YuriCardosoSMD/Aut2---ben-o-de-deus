@@ -5,36 +5,38 @@ const fs = require('fs');
 const cors = require('cors');
 
 const app = express();
-const port = 5000; 
+const port = 5000;
 
-// Habilita CORS e processamento de JSON
+// Lista que funciona como nosso banco de dados temporário
+const usuarios = [];
+
+// Configurações básicas do servidor (CORS, JSON e arquivos estáticos)
 app.use(cors());
 app.use(express.json());
-
-// Serve os arquivos estáticos do frontend
 app.use(express.static(__dirname));
-
-// Serve a pasta de uploads publicamente
 app.use('/fotos_usuarios', express.static(path.join(__dirname, 'fotos_usuarios')));
 
-// --- CONFIGURAÇÃO DO MULTER (UPLOAD) ---
+// Configura o Multer para salvar as imagens enviadas no upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const dir = 'fotos_usuarios/';
+        // Cria a pasta se ela não existir
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir, { recursive: true });
         }
         cb(null, dir);
     },
     filename: function (req, file, cb) {
+        // Gera um nome único para evitar sobrescrever arquivos
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         cb(null, 'user-' + uniqueSuffix + path.extname(file.originalname));
     }
 });
 
+// Filtros de upload: limite de 5MB e apenas imagens
 const upload = multer({ 
     storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // Limite de 5MB
+    limits: { fileSize: 5 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
         const allowedMimes = ['image/jpeg', 'image/png', 'image/gif'];
         if (allowedMimes.includes(file.mimetype)) {
@@ -45,12 +47,7 @@ const upload = multer({
     }
 });
 
-// --- BANCO DE DADOS EM MEMÓRIA ---
-const usuarios = [];
-
-// --- FUNÇÕES AUXILIARES DE VALIDAÇÃO ---
-
-// Verifica ataques de SQL Injection (Simulação)
+// Funções de ajuda para validação de segurança e formato
 function contemAtaqueSQL(texto) {
     if (!texto || typeof texto !== 'string') return false;
     const forbidden = ['SELECT', 'CREATE', 'DELETE', 'UPDATE'];
@@ -58,100 +55,82 @@ function contemAtaqueSQL(texto) {
     return forbidden.some(word => upperTexto.includes(word));
 }
 
-// Valida email no formato ccc@ddd.ccc
 function validarEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@\.]+$/;
     return regex.test(email);
 }
 
-// --- ENDPOINTS ---
-
-// 1. POST /cadastrar_usuario (Questão 3)
+// Rota para cadastrar um novo usuário
 app.post('/cadastrar_usuario', upload.single('foto'), (req, res) => {
     try {
-        // Campos recebidos do FormData
         const { nome, email, cep, rua, numero, bairro, cidade, estado, senha, complemento } = req.body;
         
-        // --- QUESTÃO 3: SANITIZAÇÃO (SEGURANÇA) ---
+        // Verifica se há tentativas de injeção de código malicioso
         const dadosVerificar = [nome, email, rua, numero, bairro, cidade, estado, senha, complemento];
-        const ataqueDetectado = dadosVerificar.some(campo => contemAtaqueSQL(campo));
-
-        if (ataqueDetectado) {
-            // Remove a foto enviada se houver ataque
+        if (dadosVerificar.some(campo => contemAtaqueSQL(campo))) {
             if (req.file) fs.unlinkSync(req.file.path);
             return res.status(500).json({ error: "Tentativa de injeção SQL detectada! Cadastro bloqueado." });
         }
 
-        // --- QUESTÃO 3: VALIDAÇÃO DUPLA (REGRAS DE NEGÓCIO) ---
+        // Valida as regras de negócio (tamanho dos campos, formato da senha, etc)
         const erros = [];
-
-        // Nome: Min caracteres para ser real (ex: 3) e max 50
         if (!nome || nome.length < 3 || nome.length > 50) erros.push("Nome inválido (deve ter entre 3 e 50 chars)");
-
-        // Email: Formato estrito
-        if (!validarEmail(email)) erros.push("Formato de e-mail inválido (ex: nome@dominio.com)");
-
-        // Endereço: Validações de tamanho
+        if (!validarEmail(email)) erros.push("Formato de e-mail inválido");
         if (!rua || rua.length < 4) erros.push("Rua muito curta (mín 4 chars)");
         if (!cidade || cidade.length < 3) erros.push("Cidade muito curta (mín 3 chars)");
         if (!estado || estado.length !== 2) erros.push("Estado deve ter 2 letras (UF)");
         
-        // Senha: Min 10 chars, letras, números e especiais permitidos (* ; #)
+        // Regras complexas de senha
         if (!senha || senha.length < 10) {
             erros.push("Senha muito curta (mín 10 chars)");
         } else {
             const temLetra = /[a-zA-Z]/.test(senha);
             const temNumero = /[0-9]/.test(senha);
-            const temEspecial = /[*;#]/.test(senha); // Apenas *, ; ou #
+            const temEspecial = /[*;#]/.test(senha);
             if (!temLetra || !temNumero || !temEspecial) {
                 erros.push("Senha deve conter letras, números e caracteres especiais (* ; #)");
             }
         }
 
-        // Se houver erros, retorna 500 com a lista e apaga a foto
+        // Se houver erros, apaga a foto enviada e retorna o erro
         if (erros.length > 0) {
             if (req.file) fs.unlinkSync(req.file.path);
             return res.status(500).json({ error: "Erro de Validação: " + erros.join(' | ') });
         }
 
-        // --- PERSISTÊNCIA ---
+        // Cria o objeto do usuário e salva na memória
         const novoUsuario = {
             id: usuarios.length + 1,
             nome,
             email,
-            // Monta o endereço incluindo o complemento se existir
             endereco: `${rua}, ${numero} ${complemento ? '('+complemento+')' : ''} - ${bairro}, ${cidade}/${estado}`,
-            // Salva o caminho da imagem (padronizando barras para evitar bugs no Windows)
             foto: req.file ? req.file.path.replace(/\\/g, '/') : 'assets/logo.png' 
         };
 
         usuarios.push(novoUsuario);
-
         console.log("Usuário cadastrado:", novoUsuario.nome);
         res.status(200).json({ message: 'OK', usuario: novoUsuario });
 
     } catch (error) {
         console.error(error);
-        if (req.file) fs.unlinkSync(req.file.path); // Limpa lixo em caso de crash
+        if (req.file) fs.unlinkSync(req.file.path);
         res.status(500).json({ error: 'Erro interno ao processar o cadastro.' });
     }
 });
 
-// 2. GET /listar_usurios - Retorna JSON paginado
+// Rota para listar usuários com paginação
 app.get('/listar_usurios', (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = 5;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const resultado = {
+    res.json({
         totalUsuarios: usuarios.length,
         totalPaginas: Math.ceil(usuarios.length / limit),
         paginaAtual: page,
         usuarios: usuarios.slice(startIndex, endIndex)
-    };
-
-    res.json(resultado);
+    });
 });
 
 // Inicia o servidor

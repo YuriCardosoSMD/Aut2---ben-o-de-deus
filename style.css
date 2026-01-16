@@ -1,5 +1,5 @@
+/* Variáveis de cores e fontes do tema */
 :root {
-    /* Cores do Design */
     --bg-color: #151515;
     --card-bg: #1e1e1e;
     --text-color: #F6EFEF;
@@ -7,11 +7,11 @@
     --accent-purple: #9D65C9;
     --error-red: #FF6666;
     
-    /* Fontes */
     --font-main: 'DM Sans', sans-serif;
     --font-sec: 'Montserrat', sans-serif;
 }
 
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -26,40 +26,40 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Globais e Utilitários --- */
 img {
     max-width: 100%;
     height: auto;
 }
 
+/* Utilitários de Layout */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Botões Padrão */
-.btn-primary {
+/* Componentes: Botões */
+.btn-primary, .btn-signup {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     background-color: var(--primary-green);
-    color: #fff;
-    padding: 12px 30px;
-    font-size: 18px;
-    font-weight: 700;
-    text-decoration: none;
+    color: #fff; /* ou #292929 para signup */
     border-radius: 8px;
+    font-weight: 600; /* ou 700 */
+    text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-primary:hover {
+.btn-primary { padding: 12px 30px; font-size: 18px; font-weight: 700; }
+.btn-signup { width: 180px; height: 50px; font-size: 20px; color: #292929; }
+
+.btn-primary:hover, .btn-signup:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
     filter: brightness(1.1);
 }
 
-/* Botão de Retornar */
 .btn-back-home {
     position: absolute;
     top: 130px;
@@ -74,26 +74,10 @@ img {
     font-weight: 600;
     transition: color 0.2s;
 }
+.btn-back-home:hover { color: var(--primary-green); }
+.btn-back-home svg { height: 20px; width: auto; }
 
-.btn-back-home:hover {
-    color: var(--primary-green);
-}
-
-.btn-back-home svg {
-    height: 20px;
-    width: auto;
-}
-
-@media (max-width: 768px) {
-    .btn-back-home {
-        position: relative;
-        top: auto;
-        left: auto;
-        margin: 20px 20px 0 20px;
-    }
-}
-
-/* --- Header --- */
+/* Estilos do Cabeçalho (Header) */
 .main-header {
     background-color: rgba(0, 0, 0, 0.2);
     padding: 20px 0;
@@ -102,514 +86,169 @@ img {
     z-index: 100;
     backdrop-filter: blur(10px);
 }
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.logo-container { display: flex; align-items: center; gap: 15px; }
+.logo { width: 250px; }
+.company-name { display: none; }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.logo {
-    width: 250px; /* Aumentado conforme solicitado */
-}
-
-.company-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    display: none; 
-}
-
-.btn-signup {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    height: 50px;
-    background-color: var(--primary-green);
-    color: #292929;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 20px;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.btn-signup:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(74, 173, 74, 0.4);
-}
-
-@media (max-width: 480px) {
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .btn-signup {
-        width: 100%;
-    }
-}
-
-/* --- Hero Sections --- */
-
-/* Hero Home (Geral) */
-.hero-section {
+/* Seção Hero (Banners principais) */
+.hero-section, .cadastro-hero {
     position: relative;
-    padding: 80px 0;
-    overflow: hidden; 
-    background-image: url('assets/fundo.jpeg'); /* Atualizado */
+    background-image: url('assets/fundo.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
+.hero-section { padding: 80px 0; overflow: hidden; }
+.cadastro-hero { padding: 60px 20px 100px 20px; display: flex; align-items: center; justify-content: center; text-align: center; width: 100%; }
 
 .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    
-    /* Gradiente Roxo/Verde com Opacidade */
-    opacity: 1.00;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
     background: linear-gradient(180deg, rgba(75, 0, 130, 0.31) 0%, rgba(0, 100, 0, 0.27) 47%, rgba(0, 0, 0, 0.35) 98%);
 }
 
 .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-    position: relative;
-    z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative; z-index: 2;
 }
-
-.hero-text {
-    text-align: left;
-}
-
-.hero-text h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--text-color);
-    margin-bottom: 20px;
-}
-
-.hero-text p {
-    font-size: 1.25rem;
-    margin-bottom: 30px;
-}
-
-@media (max-width: 900px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    .hero-image {
-        order: -1;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: center;
-    }
-    .hero-text h2 { font-size: 2.5rem; }
-}
-
-/* Hero Cadastro e Listagem */
-.cadastro-hero {
-    position: relative;
-    width: 100%;
-    padding: 60px 20px 100px 20px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url('assets/fundo.jpeg');
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-}
+.hero-text { text-align: left; }
+.hero-text h2 { font-size: 3rem; font-weight: 700; margin-bottom: 20px; }
+.hero-text p { font-size: 1.25rem; margin-bottom: 30px; }
 
 .hero-content-centered {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 100%;
 }
+.hero-big-title { font-size: 72px; font-weight: 600; margin-bottom: 20px; max-width: 1210px; word-wrap: break-word; }
+.hero-subtitle { font-size: 20px; font-weight: 600; margin-bottom: 20px; max-width: 1100px; }
+.hero-link-policy { font-family: var(--font-sec); font-size: 16px; text-decoration: underline; cursor: pointer; margin-bottom: 20px; }
 
-.hero-big-title {
-    font-size: 72px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    max-width: 1210px;
-    word-wrap: break-word;
-}
+/* Seção de Jogos */
+.games-section { padding: 60px 0; text-align: center; }
+.section-title, .form-main-title { font-size: 32px; margin-bottom: 40px; }
 
-.hero-subtitle {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    max-width: 1100px;
-}
-
-.hero-link-policy {
-    font-family: var(--font-sec);
-    font-size: 16px;
-    text-decoration: underline;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-
-@media (max-width: 768px) {
-    .hero-big-title { font-size: 42px; }
-    .hero-subtitle { font-size: 18px; }
-}
-@media (max-width: 480px) {
-    .hero-big-title { font-size: 32px; }
-}
-
-/* --- Listagem de Usuários --- */
-.users-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
-    gap: 20px;
-    width: 100%;
-    margin-top: 40px;
-    margin-bottom: 60px;
-}
-
-.user-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.user-photo {
-    width: 100%;
-    aspect-ratio: 1 / 1; 
-    background-color: #444;
-    border-radius: 8px;
-    background-image: url('https://placehold.co/150x150/444/666');
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.2s ease;
-}
-
-.user-card:hover .user-photo {
-    transform: scale(1.05);
-    border: 2px solid var(--primary-green);
-}
-
-.user-name {
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-}
-
-/* --- Seção de Jogos --- */
-.games-section {
-    padding: 60px 0;
-    text-align: center;
-}
-
-.section-title {
-    font-size: 32px;
-    margin-bottom: 40px;
-}
-
-/* Grid de Jogos (Versão Principal/Large) */
 .games-grid-large {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 40px;
-    width: 100%;
-    margin-top: 40px;
-    margin-bottom: 80px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 40px; width: 100%; margin: 40px 0 80px 0;
 }
-
 .game-card-large {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    text-align: center;
-    transition: transform 0.2s ease;
-    text-decoration: none; 
+    display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center;
+    transition: transform 0.2s ease; text-decoration: none;
 }
-
-.game-card-large:hover {
-    transform: translateY(-5px);
-}
+.game-card-large:hover { transform: translateY(-5px); }
 
 .game-cover {
-    width: 100%;
-    aspect-ratio: 2 / 3; 
-    background-color: #333;
-    border-radius: 12px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 3px solid transparent; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; aspect-ratio: 2 / 3; background-color: #333; border-radius: 12px;
+    background-size: cover; background-position: center; border: 3px solid transparent;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
 .game-card-large:hover .game-cover {
-    border-color: var(--primary-green);
-    box-shadow: 0 10px 25px rgba(74, 173, 74, 0.3);
+    border-color: var(--primary-green); box-shadow: 0 10px 25px rgba(74, 173, 74, 0.3);
 }
+.game-name { font-size: 18px; font-weight: 700; color: var(--text-color); line-height: 1.2; }
+.game-origin { font-family: var(--font-sec); font-size: 14px; color: #aaa; font-weight: 500; }
 
-.game-name {
-    font-family: var(--font-main);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-color);
-    line-height: 1.2;
-}
+/* Legado (compatibilidade) */
+.games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+.game-card { position: relative; aspect-ratio: 3 / 4; border-radius: 8px; background-size: cover; background-position: center; background-blend-mode: hard-light; display: flex; align-items: center; justify-content: center; }
 
-.game-origin {
-    font-family: var(--font-sec);
-    font-size: 14px;
-    color: #aaa;
-    font-weight: 500;
-}
+/* Seção de Formulários */
+.form-layout-section { padding: 60px 0; background-color: var(--bg-color); }
+.form-main-title { text-align: center; }
 
-.img-placeholder {
-    color: #888;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    text-shadow: 0 0 4px rgba(0,0,0,0.8);
-    opacity: 1.00;
-}
-
-.game-cover:not([style*="http"]) .img-placeholder {
-    opacity: 1.00;
-}
-
-/* Legacy Games Grid (Compatibilidade) */
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.game-card {
-    position: relative;
-    aspect-ratio: 3 / 4; 
-    border-radius: 8px;
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: hard-light;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-}
-
-/* --- Formulários --- */
-.form-layout-section {
-    padding: 60px 0;
-    background-color: var(--bg-color);
-}
-
-.form-main-title {
-    font-size: 32px;
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-.forms-grid {
-    display: flex;
-    gap: 40px;
-    justify-content: space-between;
-}
-
+.forms-grid { display: flex; gap: 40px; justify-content: space-between; }
 .form-column-left, .form-column-right { flex: 1; }
 
 .input-group { margin-bottom: 25px; display: flex; flex-direction: column; }
 .input-label-text { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
 
 .styled-input {
-    width: 100%; height: 43px; background: #C3C3C3;
-    border-radius: 8px; border: none; padding: 0 12px;
-    font-size: 16px; color: #000;
-    transition: border 0.2s ease;
+    width: 100%; height: 43px; background: #C3C3C3; border-radius: 8px; border: none;
+    padding: 0 12px; font-size: 16px; color: #000; transition: border 0.2s ease;
 }
-
 .styled-input:focus { outline: 2px solid var(--primary-green); }
 
-/* Erro de Validação */
 .input-error {
-    border: 2px solid var(--error-red) !important;
-    background-color: #e6c8c8 !important;
+    border: 2px solid var(--error-red) !important; background-color: #e6c8c8 !important;
+}
+.input-error::placeholder, .input-error::-webkit-input-placeholder {
+    color: var(--error-red) !important; font-weight: 700; opacity: 1;
 }
 
-.input-error::placeholder {
-    color: var(--error-red) !important;
-    opacity: 1;
-    font-weight: 700;
-}
-
-.input-error::-webkit-input-placeholder {
-    color: var(--error-red);
-    font-weight: 700;
-}
-
-.checkbox-wrapper-styled {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 20px; cursor: pointer;
-}
-
+.checkbox-wrapper-styled { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; cursor: pointer; }
 .hidden-checkbox-input { display: none; }
-
-.checkbox-icon {
-    display: flex; align-items: center; justify-content: center; color: var(--text-color);
-}
-
+.checkbox-icon { display: flex; align-items: center; justify-content: center; color: var(--text-color); }
 .hidden-checkbox-input:checked + .checkbox-icon { color: var(--primary-green); }
 .hidden-checkbox-input:checked + .checkbox-icon svg { fill: var(--primary-green); }
 
 .btn-action-container { display: flex; gap: 30px; }
-
 .BotO {
-    width: 180px; height: 50px; background: var(--primary-green);
-    border-radius: 8px; display: flex; justify-content: center; align-items: center;
+    width: 180px; height: 50px; background: var(--primary-green); border-radius: 8px;
+    display: flex; justify-content: center; align-items: center;
     font-size: 20px; font-weight: 600; color: #292929; box-shadow: 0px 4px 4px rgba(0,0,0,0.3);
 }
+#btnLimpar .BotO { background-color: var(--error-red); color: #fff; }
 
-@media (max-width: 768px) {
-    .forms-grid { flex-direction: column; gap: 60px; }
+/* Seção de Listagem (Grid de Usuários) */
+.users-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; width: 100%; margin-top: 40px; margin-bottom: 60px;
+}
+.user-card { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.user-photo {
+    width: 100%; aspect-ratio: 1 / 1; background-color: #444; border-radius: 8px;
+    background-size: cover; background-position: center; transition: transform 0.2s ease;
+}
+.user-card:hover .user-photo { transform: scale(1.05); border: 2px solid var(--primary-green); }
+.user-name { font-size: 14px; font-weight: 500; text-align: center; }
+
+/* Rodapé (Footer) */
+.main-footer {
+    position: relative; padding: 80px 0 0; color: var(--text-color);
+    background-image: url('assets/fundo.jpeg'); background-size: cover; background-position: center;
+}
+.footer-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+    background: linear-gradient(180deg, rgba(75, 0, 130, 0.31) 0%, rgba(0, 100, 0, 0.27) 47%, rgba(0, 0, 0, 0.35) 98%);
+}
+.footer-content {
+    position: relative; z-index: 2; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px;
+}
+.footer-logo-big { width: 100%; max-width: 500px; margin-top: 60px; height: auto; }
+
+.footer-right { flex: 1; display: flex; flex-direction: column; gap: 30px; max-width: 800px; }
+.footer-headline { font-size: 1.25rem; font-weight: 400; line-height: 1.6; }
+.footer-actions { display: flex; gap: 75px; flex-wrap: wrap; margin-left: 100px; }
+.btn-footer {
+    display: inline-flex; justify-content: center; align-items: center;
+    width: 180px; height: 50px; background-color: var(--primary-green);
+    color: #292929; font-weight: 600; text-decoration: none; border-radius: 8px;
+}
+.footer-legal-links { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.footer-legal-links a { color: var(--text-color); text-decoration: none; }
+
+/* Utilitários de Estado (Feedback Visual) */
+.error-text-red {
+    color: var(--error-red); font-size: 14px; font-weight: 600; margin-top: 5px; display: block;
+}
+.valid-text-green {
+    color: var(--primary-green); font-size: 14px; font-weight: 600; margin-top: 5px; display: block;
+    text-decoration: line-through; opacity: 0.8;
 }
 
+/* Responsividade (Media Queries) */
+@media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero-image { order: -1; margin-bottom: 20px; display: flex; justify-content: center; }
+    .hero-text h2 { font-size: 2.5rem; }
+}
+@media (max-width: 768px) {
+    .btn-back-home { position: relative; top: auto; left: auto; margin: 20px 20px 0 20px; }
+    .hero-big-title { font-size: 42px; }
+    .hero-subtitle { font-size: 18px; }
+    .forms-grid { flex-direction: column; gap: 60px; }
+}
 @media (max-width: 480px) {
+    .header-content { flex-direction: column; gap: 15px; }
+    .btn-signup { width: 100%; }
+    .hero-big-title { font-size: 32px; }
     .btn-action-container { flex-direction: column; width: 100%; }
     .btn-action-container button { width: 100%; }
     .BotO { width: 100% !important; }
-}
-
-/* --- Footer --- */
-.main-footer {
-    position: relative;
-    padding: 80px 0 0;
-    color: var(--text-color);
-    background-image: url('assets/fundo.jpeg'); /* Fundo igual ao Sobre */
-    background-size: cover;
-    background-position: center;
-}
-
-.footer-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    
-    /* Mesmo gradiente do Hero */
-    opacity: 1.00;
-    background: linear-gradient(180deg, rgba(75, 0, 130, 0.31) 0%, rgba(0, 100, 0, 0.27) 47%, rgba(0, 0, 0, 0.35) 98%);
-}
-
-.footer-content {
-    position: relative; 
-    z-index: 2; 
-    display: flex; 
-    justify-content: space-between;
-    flex-wrap: wrap; 
-    gap: 40px;
-}
-
-.footer-logo-big {
-    width: 100%;       /* Ocupa a largura disponível da coluna */
-    max-width: 500px;  /* Limita tamanho máximo */
-    margin-top: 60px;  /* Espaço superior aumentado */
-    height: auto;
-}
-
-.footer-right { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 30px; 
-    max-width: 800px; 
-}
-
-.footer-headline {
-    font-size: 1.25rem; /* Texto do mesmo tamanho do body */
-    font-weight: 400;
-    line-height: 1.6;
-}
-
-.footer-actions { 
-    display: flex; 
-    gap: 75px; 
-    flex-wrap: wrap; 
-    margin-left: 100px; 
-}
-
-.btn-footer {
-    display: inline-flex; 
-    justify-content: center; 
-    align-items: center;
-    width: 180px; 
-    height: 50px; 
-    background-color: var(--primary-green);
-    color: #292929; 
-    font-weight: 600; 
-    text-decoration: none; 
-    border-radius: 8px;
-}
-
-.footer-legal-links { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 20px; 
-    justify-content: center; 
-}
-
-.footer-legal-links a { 
-    color: var(--text-color); 
-    text-decoration: none; 
-}
-
-/* Estilo para textos de erro em vermelho */
-.error-text-red {
-    color: var(--error-red); /* Usa o vermelho definido no seu :root (#FF6666) */
-    font-size: 14px;         /* Tamanho um pouco menor que o texto padrão */
-    font-weight: 600;        /* Levemente mais grosso para destaque */
-    margin-top: 5px;         /* Um pequeno espaço acima */
-    display: block;          /* Garante que fique em linha separada */
-}
-
-/* Adicione ao final do arquivo style.css */
-
-/* Classe para quando o requisito da senha for atendido */
-.valid-text-green {
-    color: var(--primary-green); /* Usa o verde definido no :root (#4AAD4A) */
-    font-size: 14px;
-    font-weight: 600;
-    margin-top: 5px;
-    display: block;
-    text-decoration: line-through; /* Opcional: risca o item concluído */
-    opacity: 0.8;
-}
-
-/* Adicione no final do arquivo style.css */
-#btnLimpar .BotO {
-    background-color: var(--error-red);
-    color: #fff; /* Opcional: muda a cor do texto para branco para melhor contraste */
 }
