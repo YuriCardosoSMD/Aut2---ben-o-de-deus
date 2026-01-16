@@ -5,7 +5,7 @@ const fs = require('fs');
 const cors = require('cors');
 
 const app = express();
-const port = 3000; // Mantive 3000 conforme seu arquivo original
+const port = 5000; // Mantive 3000 conforme seu arquivo original
 
 // Habilita CORS e processamento de JSON
 app.use(cors());
