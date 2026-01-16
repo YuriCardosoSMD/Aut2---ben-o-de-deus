@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = '<p style="color:white; text-align:center;">Carregando dados...</p>';
             container.style.display = 'block'; 
 
-            const res = await fetch(`http://localhost:3000/listar_usurios?page=${pagina}`);
+            const res = await fetch(`http://localhost:5000/listar_usurios?page=${pagina}`);
             const data = await res.json();
 
             if (data.usuarios.length === 0) {
@@ -220,13 +220,37 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Botão Limpar
+        // --- LÓGICA DO BOTÃO LIMPAR (ATUALIZADA) ---
         btnLimpar.addEventListener('click', () => {
-            if(confirm("Deseja limpar todos os campos?")) {
+            // 1. Popup de Confirmação
+            if (confirm("Tem certeza que deseja limpar todos os campos preenchidos?")) {
+                
+                // 2. Reseta os valores padrão do formulário (Inputs de texto, checkbox, radio)
                 form.reset();
-                // Reseta visualmente as validações de senha para vermelho
+
+                // 3. Garante o reset de estados dinâmicos do JavaScript:
+                
+                // a) Destrava o campo "Número" caso o checkbox "Sem Número" tenha sido usado
+                if (numInput) {
+                    numInput.readOnly = false;
+                    numInput.value = ""; 
+                }
+
+                // b) Volta os campos de senha para o modo oculto (password) se estiverem visíveis
+                if (senhaInput) {
+                    senhaInput.setAttribute('type', 'password');
+                }
+                if (senhaConfirmInput) {
+                    senhaConfirmInput.setAttribute('type', 'password');
+                }
+
+                // c) Reseta a cor dos ícones de "olho" (volta para cinza)
+                if (toggleSenhaBtn) toggleSenhaBtn.style.color = '#575757';
+                if (toggleSenhaConfirmBtn) toggleSenhaConfirmBtn.style.color = '#575757';
+
+                // 4. Reseta visualmente as validações de senha (tudo volta para vermelho)
                 [reqTamanho, reqMaiuscula, reqNumero, reqEspecial, reqIguais].forEach(el => {
-                    if(el) {
+                    if (el) {
                         el.classList.remove('valid-text-green');
                         el.classList.add('error-text-red');
                     }
@@ -248,9 +272,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const senha = formData.get('senha');
             const senhaConfirm = formData.get('senha_confirm');
 
-            // 1. Nome
-            if (!nome || nome.length < 2 || nome.length > 50) {
-                alert("O nome deve ter entre 2 e 50 caracteres.");
+            // 1. Nome (Alterado para mínimo de 3 caracteres)
+            if (!nome || nome.length < 3 || nome.length > 50) {
+                alert("O nome deve ter entre 3 e 50 caracteres.");
                 return;
             }
 
@@ -288,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Envio para o Backend
             try {
-                const response = await fetch('http://localhost:3000/cadastrar_usuario', {
+                const response = await fetch('http://localhost:5000/cadastrar_usuario', {
                     method: 'POST',
                     body: formData
                 });

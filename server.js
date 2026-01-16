@@ -5,7 +5,7 @@ const fs = require('fs');
 const cors = require('cors');
 
 const app = express();
-const port = 5000; // Mantive 3000 conforme seu arquivo original
+const port = 5000; 
 
 // Habilita CORS e processamento de JSON
 app.use(cors());
@@ -85,8 +85,8 @@ app.post('/cadastrar_usuario', upload.single('foto'), (req, res) => {
         // --- QUESTÃO 3: VALIDAÇÃO DUPLA (REGRAS DE NEGÓCIO) ---
         const erros = [];
 
-        // Nome: Min caracteres para ser real (ex: 2) e max 50
-        if (!nome || nome.length < 2 || nome.length > 50) erros.push("Nome inválido (deve ter entre 2 e 50 chars)");
+        // Nome: Min caracteres para ser real (ex: 3) e max 50
+        if (!nome || nome.length < 3 || nome.length > 50) erros.push("Nome inválido (deve ter entre 3 e 50 chars)");
 
         // Email: Formato estrito
         if (!validarEmail(email)) erros.push("Formato de e-mail inválido (ex: nome@dominio.com)");
