@@ -607,3 +607,9 @@ img {
     text-decoration: line-through; /* Opcional: risca o item concluído */
     opacity: 0.8;
 }
+
+/* Adicione no final do arquivo style.css */
+#btnLimpar .BotO {
+    background-color: var(--error-red);
+    color: #fff; /* Opcional: muda a cor do texto para branco para melhor contraste */
+}
